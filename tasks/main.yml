@@ -34,7 +34,8 @@
   register: prereq_java
   changed_when: false
 
-- fail:
+- name: "Fail if JAVA is not available"
+  fail:
     msg: "JAVA is not installed or configured"
   when: not prereq_java.rc == 0
 
