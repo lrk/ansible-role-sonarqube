@@ -2,6 +2,8 @@
 - name: "Setup Requirements"
   hosts: localhost
   become: true
+  vars_files:
+    - vars.yml
   pre_tasks:
     - name: Install package dependencies.
       package:

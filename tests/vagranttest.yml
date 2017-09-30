@@ -3,5 +3,7 @@
 
 - hosts: localhost
   become: true
+  vars_files:
+    - vars.yml
   roles:
     - ansible-role-sonarqube

@@ -2,7 +2,7 @@
 
 - name: "Ensure SonarQube binary exists"
   stat:
-    path: "{{ sonar_daemon_dir }}/linux-x86-64/sonar.sh"
+    path: "{{ sonar_daemon_dir }}/sonar.sh"
   register: sonar_binary_stat
 
 - block:
@@ -27,3 +27,44 @@
       state: absent
 
   when: not sonar_binary_stat.stat.exists
+
+- name: "Ensure SonarQube as init script for service management"
+  file:
+    src: "{{ sonar_daemon_dir }}/sonar.sh"
+    dest: /etc/init.d/sonar
+    state: link
+  when: "ansible_service_mgr != 'systemd'"
+
+- name: "Copy SonarQube systemd unit file into place (for systemd systems)."
+  template:
+    src: sonar.service.j2
+    dest: /etc/systemd/system/sonar.service
+    owner: root
+    group: root
+    mode: 0755
+  when: "ansible_service_mgr == 'systemd'"
+
+- name: "Ensure SonarQube is running and set to start on boot."
+  service:
+    name: sonar
+    state: started
+    enabled: yes
+
+- name: "Ensure SonarQube files permissions"
+  file:
+    path: "{{ sonar_install_directory }}"
+    state: directory
+    recurse: yes
+    owner: "{{ sonar_user }}"
+    group: "{{ sonar_group }}"
+    mode: "go-w"
+
+- name: "Ensure SonarQube configuration"
+  template:
+    src: "sonar.properties.j2"
+    dest: "{{ sonar_conf_dir }}/sonar.properties"
+    owner: "{{ sonar_user }}"
+    group: "{{ sonar_group }}"
+    mode: "u=rw,g=,o="
+  notify:
+      - "restart SonarQube service"
