@@ -2,7 +2,7 @@
 
 - name: "Ensure SonarQube binary exists"
   stat:
-    path: "{{ sonar_daemon_dir }}/sonar"
+    path: "{{ sonar_daemon_dir }}/linux-x86-64/sonar.sh"
   register: sonar_binary_stat
 
 - block:
@@ -25,4 +25,5 @@
     file:
       path: "/tmp/{{ __sonar_archive }}"
       state: absent
+
   when: not sonar_binary_stat.stat.exists

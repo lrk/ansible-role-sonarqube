@@ -2,10 +2,13 @@
 # defaults file for ansible-role-sonarqube/
 
 # SonarQube Install directory
-sonar_install_directory: /var/opt/sonarqube
+sonar_install_directory: /opt/sonarqube
+
+# SonarQube base directory
+sonar_base_dir: "{{ sonar_install_directory }}/sonarqube-{{ sonar_version }}"
 
 # SonarQube daemon directory
-sonar_daemon_dir: "{{ sonar_install_directory }}/bin"
+sonar_daemon_dir: "{{ sonar_base_dir }}/bin"
 
 # SonarQube version to install
 sonar_version: 5.6.7
