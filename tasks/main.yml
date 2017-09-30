@@ -1,2 +1,41 @@
 ---
 # tasks file for ansible-role-sonarqube/
+
+
+- name: "Create SonarQube system group"
+  group:
+    name: "{{ sonar_group }}"
+    state: present
+
+- name: "Create SonarQube system user"
+  user:
+    name: "{{ sonar_user }}"
+    group: "{{ sonar_group }}"
+    createhome: no
+    shell: "/sbin/nologin"
+    comment: "SonarQube System user"
+    state: present
+
+- name: "Create SonarQube directories"
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ sonar_user }}"
+    group: "{{ sonar_group }}"
+    mode: "u=rwx,g=rx,o="
+  with_items:
+    - "{{ sonar_install_directory }}"
+    - "{{ sonar_logs_dir }}"
+    - "{{ sonar_data_dir }}"
+    - "{{ sonar_temp_dir }}"
+
+- name: "Ensure JAVA is installed"
+  command: "java -version"
+  register: prereq_java
+  changed_when: false
+
+- fail:
+    msg: "JAVA is not installed or configured"
+  when: not prereq_java.rc == 0
+
+- include: setup_sonarqube.yml

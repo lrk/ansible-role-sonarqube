@@ -1,2 +1,4 @@
 ---
 # vars file for ansible-role-sonarqube/
+__sonar_archive: "sonarqube-{{ sonar_version }}.zip"
+__sonar_download_url: "https://sonarsource.bintray.com/Distribution/sonarqube/{{ __sonar_archive }}"

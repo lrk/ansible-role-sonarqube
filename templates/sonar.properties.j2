@@ -1,0 +1,103 @@
+# Property values can:
+# - reference an environment variable, for example sonar.jdbc.url= ${env:SONAR_JDBC_URL}
+# - be encrypted. See http://redirect.sonarsource.com/doc/settings-encryption.html
+
+#--------------------------------------------------------------------------------------------------
+# DATABASE
+
+{% if sonar_db_embedded %}
+sonar.embeddedDatabase.port={{ sonar_db_embedded_port | default('9092') }}
+{% else %}
+sonar.jdbc.username={{ sonar_db_user }}
+sonar.jdbc.password={{ sonar_db_pass }}
+sonar.jdbc.url={{ sonar_jdbc_url }}
+{% endif %}
+
+sonar.jdbc.maxActive={{ sonar_jdbc_maxactive | default('60') }}
+sonar.jdbc.maxIdle={{ sonar_jdbc_maxidle | default('5') }}
+sonar.jdbc.minIdle={{ sonar_jdbc_minidle | default('2') }}
+sonar.jdbc.maxWait={{ sonar_jdbc_maxwait | default('5000') }}
+
+sonar.jdbc.minEvictableIdleTimeMillis={{ sonar_jdbc_min_evictable_idle_time_millis | default('600000') }}
+sonar.jdbc.timeBetweenEvictionRunsMillis={{ sonar_jdbc_time_between_eviction_runs_millis | default('30000') }}
+
+#--------------------------------------------------------------------------------------------------
+# WEB SERVER
+
+sonar.web.javaOpts={{ sonar_web_java_opts | default('-Xmx512m -Xms128m -XX:+HeapDumpOnOutOfMemoryError -Djava.net.preferIPv4Stack=true') }}
+sonar.web.javaAdditionalOpts={{ sonar_web_java_additional_opts | default('') }}
+sonar.web.host={{ sonar_web_host | default('0.0.0.0') }}
+sonar.web.context={{ sonar_web_context | default('') }}
+sonar.web.port={{ sonar_web_port | default('9000') }}
+sonar.web.http.maxThreads={{ sonar_web_http_max_threads | default('50') }}
+sonar.web.http.minThreads={{ sonar_web_http_min_threads | default('5') }}
+sonar.web.http.acceptCount={{ sonar_web_http_accept_count | default('25') }}
+sonar.ajp.port={{ sonar_ajp_port | default('-1') }}
+
+
+#--------------------------------------------------------------------------------------------------
+# COMPUTE ENGINE
+
+sonar.ce.javaOpts={{ sonar_ce_java_opts | default('-Xmx512m -Xms128m -XX:+HeapDumpOnOutOfMemoryError -Djava.net.preferIPv4Stack=true') }}
+sonar.ce.javaAdditionalOpts={{ sonar_ce_java_additional_opts | default('') }}
+sonar.ce.workerCount={{ sonar_ce_worker_count | default('1') }}
+
+#--------------------------------------------------------------------------------------------------
+# ELASTICSEARCH
+
+sonar.search.javaOpts={{ sonar_search_java_opts | default('-Xmx1G -Xms256m -Xss256k -Djava.net.preferIPv4Stack=true -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=75 -XX:+UseCMSInitiatingOccupancyOnly -XX:+HeapDumpOnOutOfMemoryError') }}
+sonar.search.javaAdditionalOpts={{ sonar_search_java_additional_opts | default('') }}
+sonar.search.port={{ sonar_search_port | default('9001') }}
+sonar.search.host={{ sonar_search_host | default('127.0.0.1') }}
+
+
+#--------------------------------------------------------------------------------------------------
+# UPDATE CENTER
+
+sonar.updatecenter.activate={{ sonar_updatecenter_activate | default('false') }}
+http.proxyHost={{ http_proxy_host | default('') }}
+http.proxyPort={{ http_proxy_port | default('') }}
+https.proxyHost={{ https_proxy_host | default('') }}
+https.proxyPort={{ https_proxy_port | default('') }}
+
+http.auth.ntlm.domain={{ http_auth_ntlm_domain | default('') }}
+
+socksProxyHost={{ socks_proxy_host | default('') }}
+socksProxyPort={{ socks_proxy_port | default('') }}
+
+# Proxy authentication (used for HTTP, HTTPS and SOCKS proxies)
+http.proxyUser={{ http_proxy_user | default('') }}
+http.proxyPassword={{ http_proxy_password | default('') }}
+
+
+#--------------------------------------------------------------------------------------------------
+# LOGGING
+
+sonar.log.level={{ sonar_log_level | default('INFO') }}
+sonar.path.logs={{ sonar_logs_dir | default('logs') }}
+sonar.log.rollingPolicy={{ sonar_log_rolling_policy | default('time:yyyy-MM-dd') }}
+sonar.log.maxFiles={{ sonar_log_max_files | default('7') }}
+sonar.web.accessLogs.enable={{ sonar_web_accessLogs_enable | default('true') }}
+sonar.web.accessLogs.pattern={{ sonar_web_access_logs_pattern | default('combined')}}
+
+
+#--------------------------------------------------------------------------------------------------
+# OTHERS
+
+# Delay in seconds between processing of notification queue. Default is 60 seconds.
+sonar.notifications.delay={{ sonar_notifications_delay | default('60') }}
+
+# Paths to persistent data files (embedded database and search index) and temporary files.
+# Can be absolute or relative to installation directory.
+# Defaults are respectively <installation home>/data and <installation home>/temp
+sonar.path.data={{ sonar_data_dir | default('data') }}
+sonar.path.temp={{ sonar_temp_dir | default('temp') }}
+
+
+#--------------------------------------------------------------------------------------------------
+# DEVELOPMENT - only for developers
+# The following properties MUST NOT be used in production environments.
+
+sonar_web_dev={{ sonar_web_dev | default('false') }}
+sonar.web.dev.sources={{ sonar_web_dev_sources | default('') }}
+sonar.search.httpPort={{ sonar_search_http_port | default('-1') }}

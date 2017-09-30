@@ -1,0 +1,15 @@
+---
+- name: "Setup Requirements"
+  hosts: localhost
+  become: true
+  vars_files:
+    - vars.yml
+  pre_tasks:
+    - name: Install package dependencies.
+      package:
+        name: "{{ item }}"
+        state: "present"
+      with_items:
+        - unzip
+  roles:
+    - geerlingguy.java

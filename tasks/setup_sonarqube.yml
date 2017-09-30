@@ -1,0 +1,70 @@
+---
+
+- name: "Ensure SonarQube binary exists"
+  stat:
+    path: "{{ sonar_daemon_dir }}/sonar.sh"
+  register: sonar_binary_stat
+
+- block:
+  - name: "Download SonarQube binaries"
+    get_url:
+      url: "{{ __sonar_download_url }}"
+      dest: "/tmp/{{ __sonar_archive }}"
+    retries: 5
+    delay: 10
+
+  - name: "Expand SonarQube binaries"
+    unarchive:
+      src: "/tmp/{{ __sonar_archive }}"
+      dest: "{{ sonar_install_directory }}"
+      owner: "{{ sonar_user }}"
+      group: "{{ sonar_group }}"
+      copy: no
+
+  - name: "Remove SonarQube archive"
+    file:
+      path: "/tmp/{{ __sonar_archive }}"
+      state: absent
+
+  when: not sonar_binary_stat.stat.exists
+
+- name: "Ensure SonarQube as init script for service management"
+  file:
+    src: "{{ sonar_daemon_dir }}/sonar.sh"
+    dest: /etc/init.d/sonar
+    state: link
+  when: "ansible_service_mgr != 'systemd'"
+
+- name: "Copy SonarQube systemd unit file into place (for systemd systems)."
+  template:
+    src: sonar.service.j2
+    dest: /etc/systemd/system/sonar.service
+    owner: root
+    group: root
+    mode: 0755
+  when: "ansible_service_mgr == 'systemd'"
+
+- name: "Ensure SonarQube is running and set to start on boot."
+  service:
+    name: sonar
+    state: started
+    enabled: yes
+
+- name: "Ensure SonarQube files permissions"
+  file:
+    path: "{{ sonar_install_directory }}"
+    state: directory
+    recurse: yes
+    owner: "{{ sonar_user }}"
+    group: "{{ sonar_group }}"
+    mode: "go-w"
+
+- name: "Ensure SonarQube configuration"
+  template:
+    src: "sonar.properties.j2"
+    dest: "{{ sonar_conf_dir }}/sonar.properties"
+    owner: "{{ sonar_user }}"
+    group: "{{ sonar_group }}"
+    mode: "u=rw,g=,o="
+  notify:
+      - "restart SonarQube service"

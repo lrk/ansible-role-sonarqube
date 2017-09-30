@@ -1,2 +1,6 @@
 ---
 # handlers file for ansible-role-sonarqube/
+- name: "restart SonarQube service"
+  service:
+    name: sonar
+    state: restarted

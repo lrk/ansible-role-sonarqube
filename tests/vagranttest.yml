@@ -1,6 +1,9 @@
 ---
+- include: setup_requirements.yml
+
 - hosts: localhost
-  remote_user: root
   become: true
+  vars_files:
+    - vars.yml
   roles:
-    - ansible-role-sonarqubbe
+    - ansible-role-sonarqube
