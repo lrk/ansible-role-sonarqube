@@ -29,6 +29,7 @@
 - name: "Ensure JAVA is installed"
   command: "java -version"
   register: prereq_java
+  changed_when: false
 
 - include: setup_sonarqube.yml
   when: prereq_java.rc == 0

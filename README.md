@@ -28,8 +28,13 @@ Available variables along with default values are listed below (see `defaults/ma
 Dependencies
 ------------
 
+This role need the following Ansible Galaxy dependencies:
+
 - [geerlingguy.java](https://galaxy.ansible.com/geerlingguy/java/)
 
+As it use the following Ansible modules, it also need some packages on role target:
+
+- module `unarchive`: unzip package
 
 Example Playbook
 ----------------
