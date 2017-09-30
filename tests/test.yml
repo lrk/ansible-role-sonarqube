@@ -1,4 +1,6 @@
 ---
+- include: setup_requirements.yml
+
 - hosts: localhost
   remote_user: root
   roles:

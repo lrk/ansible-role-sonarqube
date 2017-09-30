@@ -2,3 +2,4 @@
 *.retry
 .vagrant
 tests/roles
+tests/galaxy_roles

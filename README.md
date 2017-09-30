@@ -28,7 +28,8 @@ Available variables along with default values are listed below (see `defaults/ma
 Dependencies
 ------------
 
-None
+- [geerlingguy.java](https://galaxy.ansible.com/geerlingguy/java/)
+
 
 Example Playbook
 ----------------

@@ -1,0 +1,6 @@
+---
+- name: "Setup Requirements"
+  hosts: localhost
+  become: true
+  roles:
+    - geerlingguy.java

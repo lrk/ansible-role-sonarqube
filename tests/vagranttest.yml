@@ -1,6 +1,7 @@
 ---
+- include: setup_requirements.yml
+
 - hosts: localhost
-  remote_user: root
   become: true
   roles:
-    - ansible-role-sonarqubbe
+    - ansible-role-sonarqube
