@@ -2,7 +2,7 @@
 
 - name: "Ensure SonarQube binary exists"
   stat:
-    path: "{{ prometheus_daemon_dir }}/sonar"
+    path: "{{ sonar_daemon_dir }}/sonar"
   register: sonar_binary_stat
 
 - block:
@@ -23,6 +23,6 @@
 
   - name: "Remove SonarQube archive"
     file:
-      path: "/tmp/{{ prometheus_prom_archive }}"
+      path: "/tmp/{{ __sonar_archive }}"
       state: absent
   when: not sonar_binary_stat.stat.exists

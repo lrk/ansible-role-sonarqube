@@ -27,7 +27,7 @@
     - "{{ sonar_install_directory }}"
 
 - name: "Ensure JAVA is installed"
-  command: "java --version"
+  command: "java -version"
   register: prereq_java
 
 - include: setup_sonarqube.yml
