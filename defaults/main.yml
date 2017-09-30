@@ -1,0 +1,5 @@
+---
+# defaults file for ansible-role-sonarqube/
+
+#SonarQube Install directory
+sonar_install_directory: /var/opt/sonarqube
