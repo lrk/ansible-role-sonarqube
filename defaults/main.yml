@@ -30,6 +30,10 @@ sonar_group: sonar
 # SonarQube system user
 sonar_user: sonar
 
+# SonarQube plugins to install
+sonar_plugins: []
+# - { name: "plugin name", version: "1.0", commercial: false, url: 'optional'}
+
 # Use the embedded H2 database, not for production environmnet
 sonar_db_embedded: true
 sonar_db_embedded_port: 9092
