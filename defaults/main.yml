@@ -35,8 +35,8 @@ sonar_db_embedded: true
 sonar_db_embedded_port: 9092
 
 # SonarQube JDBC Credentials
-sonar_db_user: null
-sonar_db_pass: null
+sonar_db_user: ""
+sonar_db_pass: ""
 
 # SonarQube JDBC URL
 # examples (from default sonar.properties file):
@@ -68,7 +68,7 @@ sonar_db_pass: null
 # Set the sonar.jdbc.username and sonar.jdbc.password appropriately.
 #sonar_jdbc_url=jdbc:sqlserver://localhost;databaseName=sonar
 
-sonar_jdbc_url: null
+sonar_jdbc_url: ""
 
 # SonarQube JDBC maximum number of active connection
 sonar_jdbc_maxactive: 60
@@ -92,7 +92,8 @@ sonar_jdbc_time_between_eviction_runs_millis: 30000
 
 
 # SonarQube Web Server configuration
-sonar_web_java_opts: "-Xmx512m -Xms128m -XX:+HeapDumpOnOutOfMemoryError -Djava.net.preferIPv4Stack=true"
+# sonar_web_java_opts: "-Xmx512m -Xms128m -XX:+HeapDumpOnOutOfMemoryError -Djava.net.preferIPv4Stack=true"
+sonar_web_java_opts: ""
 
 # Same as previous property, but allows to not repeat all other settings like -Xmx
 sonar_web_java_additional_opts: ""
@@ -104,7 +105,7 @@ sonar_web_host: 0.0.0.0
 
 # Web context. When set, it must start with forward slash (for example /sonarqube).
 # The default value is root context (empty value).
-sonar_web_context: /
+sonar_web_context: ""
 
 # TCP port for incoming HTTP connections. Default value is 9000.
 sonar_web_port: 9000
@@ -137,7 +138,8 @@ sonar_ajp_port: -1
 #    is not enabled by default on your environment:
 #    http://docs.oracle.com/javase/8/docs/technotes/guides/vm/server-class.html
 #
-sonar_ce_java_opts: "-Xmx512m -Xms128m -XX:+HeapDumpOnOutOfMemoryError -Djava.net.preferIPv4Stack=true"
+# sonar_ce_java_opts: "-Xmx512m -Xms128m -XX:+HeapDumpOnOutOfMemoryError -Djava.net.preferIPv4Stack=true"
+sonar_ce_java_opts: ""
 
 # Same as previous property, but allows to not repeat all other settings like -Xmx
 sonar_ce_java_additional_opts: ""
@@ -182,8 +184,8 @@ sonar_search_host: 127.0.0.1
 # UPDATE CENTER
 
 # Update Center requires an internet connection to request https://update.sonarsource.org
-# It is disabled by default.
-sonar_updatecenter_activate: false
+# It is enabled by default.
+sonar_updatecenter_activate: true
 
 # HTTP proxy (default none)
 http_proxy_host: ""

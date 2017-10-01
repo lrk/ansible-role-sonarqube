@@ -24,10 +24,10 @@ sonar.jdbc.timeBetweenEvictionRunsMillis={{ sonar_jdbc_time_between_eviction_run
 #--------------------------------------------------------------------------------------------------
 # WEB SERVER
 
-sonar.web.javaOpts={{ sonar_web_java_opts | default('-Xmx512m -Xms128m -XX:+HeapDumpOnOutOfMemoryError -Djava.net.preferIPv4Stack=true') }}
-sonar.web.javaAdditionalOpts={{ sonar_web_java_additional_opts | default('') }}
+{% if (sonar_web_java_opts is defined) and (sonar_web_java_opts != "") %}sonar.web.javaOpts={{ sonar_web_java_opts }}{% endif %}
+{% if (sonar_web_java_additional_opts is defined) and (sonar_web_java_additional_opts != "") %}sonar.web.javaAdditionalOpts={{ sonar_web_java_additional_opts | default('') }}{% endif %}
 sonar.web.host={{ sonar_web_host | default('0.0.0.0') }}
-sonar.web.context={{ sonar_web_context | default('') }}
+{% if (sonar_web_context is defined) and (sonar_web_context != "") %}sonar.web.context={{ sonar_web_context }}{% endif %}
 sonar.web.port={{ sonar_web_port | default('9000') }}
 sonar.web.http.maxThreads={{ sonar_web_http_max_threads | default('50') }}
 sonar.web.http.minThreads={{ sonar_web_http_min_threads | default('5') }}
@@ -38,8 +38,8 @@ sonar.ajp.port={{ sonar_ajp_port | default('-1') }}
 #--------------------------------------------------------------------------------------------------
 # COMPUTE ENGINE
 
-sonar.ce.javaOpts={{ sonar_ce_java_opts | default('-Xmx512m -Xms128m -XX:+HeapDumpOnOutOfMemoryError -Djava.net.preferIPv4Stack=true') }}
-sonar.ce.javaAdditionalOpts={{ sonar_ce_java_additional_opts | default('') }}
+{% if (sonar_ce_java_opts is defined) and (sonar_ce_java_opts != "") %}sonar.ce.javaOpts={{ sonar_ce_java_opts }}{% endif %}
+{% if (sonar_ce_java_additional_opts is defined) and (sonar_ce_java_additional_opts != "") %}sonar.ce.javaAdditionalOpts={{ sonar_ce_java_additional_opts }}{% endif %}
 sonar.ce.workerCount={{ sonar_ce_worker_count | default('1') }}
 
 #--------------------------------------------------------------------------------------------------
@@ -54,20 +54,20 @@ sonar.search.host={{ sonar_search_host | default('127.0.0.1') }}
 #--------------------------------------------------------------------------------------------------
 # UPDATE CENTER
 
-sonar.updatecenter.activate={{ sonar_updatecenter_activate | default('false') }}
-http.proxyHost={{ http_proxy_host | default('') }}
-http.proxyPort={{ http_proxy_port | default('') }}
-https.proxyHost={{ https_proxy_host | default('') }}
-https.proxyPort={{ https_proxy_port | default('') }}
+sonar.updatecenter.activate={{ sonar_updatecenter_activate | default('true') | lower }}
+{% if (http_proxy_host is defined) and (http_proxy_host != "") %}http.proxyHost={{ http_proxy_host }}{% endif %}
+{% if (http_proxy_port is defined) and (http_proxy_port != "") %}http.proxyPort={{ http_proxy_port }}{% endif %}
+{% if (https_proxy_host is defined) and (https_proxy_host != "") %}https.proxyHost={{ https_proxy_host }}{% endif %}
+{% if (https_proxy_port is defined) and (https_proxy_port != "") %}https.proxyPort={{ https_proxy_port }}{% endif %}
 
-http.auth.ntlm.domain={{ http_auth_ntlm_domain | default('') }}
+{% if (http_auth_ntlm_domain is defined) and (http_auth_ntlm_domain != "") %}http.auth.ntlm.domain={{ http_auth_ntlm_domain }}{% endif %}
 
-socksProxyHost={{ socks_proxy_host | default('') }}
-socksProxyPort={{ socks_proxy_port | default('') }}
+{% if (socks_proxy_host is defined) and (socks_proxy_host != "") %}socksProxyHost={{ socks_proxy_host }}{% endif %}
+{% if (socks_proxy_port is defined) and (socks_proxy_port != "") %}socksProxyPort={{ socks_proxy_port }}{% endif %}
 
 # Proxy authentication (used for HTTP, HTTPS and SOCKS proxies)
-http.proxyUser={{ http_proxy_user | default('') }}
-http.proxyPassword={{ http_proxy_password | default('') }}
+{% if (http_proxy_user is defined) and (http_proxy_user != "") %}http.proxyUser={{ http_proxy_user }}{% endif %}
+{% if (http_proxy_password is defined) and (http_proxy_password != "") %}http.proxyPassword={{ http_proxy_password }}{% endif %}
 
 
 #--------------------------------------------------------------------------------------------------
@@ -77,7 +77,7 @@ sonar.log.level={{ sonar_log_level | default('INFO') }}
 sonar.path.logs={{ sonar_logs_dir | default('logs') }}
 sonar.log.rollingPolicy={{ sonar_log_rolling_policy | default('time:yyyy-MM-dd') }}
 sonar.log.maxFiles={{ sonar_log_max_files | default('7') }}
-sonar.web.accessLogs.enable={{ sonar_web_accessLogs_enable | default('true') }}
+sonar.web.accessLogs.enable={{ sonar_web_accessLogs_enable | default('true') | lower }}
 sonar.web.accessLogs.pattern={{ sonar_web_access_logs_pattern | default('combined')}}
 
 
@@ -97,7 +97,6 @@ sonar.path.temp={{ sonar_temp_dir | default('temp') }}
 #--------------------------------------------------------------------------------------------------
 # DEVELOPMENT - only for developers
 # The following properties MUST NOT be used in production environments.
-
-sonar_web_dev={{ sonar_web_dev | default('false') }}
-sonar.web.dev.sources={{ sonar_web_dev_sources | default('') }}
-sonar.search.httpPort={{ sonar_search_http_port | default('-1') }}
+{% if (sonar_web_dev is defined) and (sonar_web_dev != False) %}sonar_web_dev={{ sonar_web_dev  | lower}}{% endif %}
+{% if (sonar_web_dev_sources is defined) and (sonar_web_dev_sources != '') %}sonar.web.dev.sources={{ sonar_web_dev_sources }}{% endif %}
+{% if (sonar_search_http_port is defined) and (sonar_search_http_port != -1) %}sonar.search.httpPort={{ sonar_search_http_port }}{% endif %}

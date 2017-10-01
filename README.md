@@ -63,8 +63,8 @@ Available variables along with default values are listed below (see `defaults/ma
   sonar_db_embedded_port: 9092
 
   # SonarQube JDBC Credentials
-  sonar_db_user: null
-  sonar_db_pass: null
+  sonar_db_user: ""
+  sonar_db_pass: ""
 
   # SonarQube JDBC URL
   # examples (from default sonar.properties file):
@@ -96,7 +96,7 @@ Available variables along with default values are listed below (see `defaults/ma
   # Set the sonar.jdbc.username and sonar.jdbc.password appropriately.
   #sonar_jdbc_url=jdbc:sqlserver://localhost;databaseName=sonar
 
-  sonar_jdbc_url: null
+  sonar_jdbc_url: ""
 
   # SonarQube JDBC maximum number of active connection
   sonar_jdbc_maxactive: 60
@@ -120,7 +120,8 @@ Available variables along with default values are listed below (see `defaults/ma
 
 
   # SonarQube Web Server configuration
-  sonar_web_java_opts: "-Xmx512m -Xms128m -XX:+HeapDumpOnOutOfMemoryError -Djava.net.preferIPv4Stack=true"
+  # sonar_web_java_opts: "-Xmx512m -Xms128m -XX:+HeapDumpOnOutOfMemoryError -Djava.net.preferIPv4Stack=true"
+  sonar_web_java_opts: ""
 
   # Same as previous property, but allows to not repeat all other settings like -Xmx
   sonar_web_java_additional_opts: ""
@@ -132,7 +133,7 @@ Available variables along with default values are listed below (see `defaults/ma
 
   # Web context. When set, it must start with forward slash (for example /sonarqube).
   # The default value is root context (empty value).
-  sonar_web_context: /
+  sonar_web_context: ""
 
   # TCP port for incoming HTTP connections. Default value is 9000.
   sonar_web_port: 9000
@@ -165,7 +166,8 @@ Available variables along with default values are listed below (see `defaults/ma
   #    is not enabled by default on your environment:
   #    http://docs.oracle.com/javase/8/docs/technotes/guides/vm/server-class.html
   #
-  sonar_ce_java_opts: "-Xmx512m -Xms128m -XX:+HeapDumpOnOutOfMemoryError -Djava.net.preferIPv4Stack=true"
+  # sonar_ce_java_opts: "-Xmx512m -Xms128m -XX:+HeapDumpOnOutOfMemoryError -Djava.net.preferIPv4Stack=true"
+  sonar_ce_java_opts: ""
 
   # Same as previous property, but allows to not repeat all other settings like -Xmx
   sonar_ce_java_additional_opts: ""
@@ -210,8 +212,8 @@ Available variables along with default values are listed below (see `defaults/ma
   # UPDATE CENTER
 
   # Update Center requires an internet connection to request https://update.sonarsource.org
-  # It is disabled by default.
-  sonar_updatecenter_activate: false
+  # It is enabled by default.
+  sonar_updatecenter_activate: true
 
   # HTTP proxy (default none)
   http_proxy_host: ""
@@ -292,7 +294,8 @@ Dependencies
 This role need the following Ansible Galaxy dependencies:
 
 - [geerlingguy.java](https://galaxy.ansible.com/geerlingguy/java/)
-  Override the default `java_packages` variable to set a java package that match SonarQube requirements on JAVA version (depending on SonarQube version)
+
+Override the default `java_packages` variable to set a java package that match SonarQube requirements on JAVA version (depending on SonarQube version)
 
 As it use the following Ansible modules, it also need some packages on role target:
 
@@ -301,6 +304,7 @@ As it use the following Ansible modules, it also need some packages on role targ
 Example Playbook
 ----------------
 
+```
   - hosts: servers
     vars:
       java_packages:
@@ -315,6 +319,7 @@ Example Playbook
     roles:
       - geerlingguy.java
       - lrk.sonarqube
+```
 
 License
 -------
