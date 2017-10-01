@@ -19,6 +19,26 @@ For production environment, make sure to set the `sonar_db_embedded` variable to
 SonarQube support following databases: MySQL, Oracle, PostgreSQL and Microsoft SQLServer.
 
 
+
+SonarQube plugin installation
+-----------------------------
+
+This role support plugin installation based on "[SonarQube manual plugin installation](https://docs.sonarqube.org/display/SONAR/Installing+a+Plugin)" procedure.
+
+Please note that this role does not handle previously installed plugins.
+You *HAVE TO* remove previous versions yourself as stated in SonarQube documentation:
+`If another version of the same plugin is already there, you need to remove it, since only one version of a given plugin may be available in the extensions/plugins directory.`
+
+You can list all plugin you need in the `sonar_plugins` variables, with the following syntax:
+```
+# sonar_plugins variable example:
+sonar_plugins:
+- { name: "sonar-ldap-plugin", version: "2.0", commercial: false}
+- { name: "sonar-city-model-plugin", version: "3.3", commercial: true, url: "http://www.qalitax.com/descargas/product/sonar-city-model-plugin-3.3.jar?customerSurnames=update-center&customerCompany=sonar-update-center&customerName=sonarqube&customerEmail=downloads@excentia.es"}
+
+```
+
+
 Role Variables
 --------------
 
@@ -57,6 +77,11 @@ Available variables along with default values are listed below (see `defaults/ma
 
   # SonarQube system user
   sonar_user: sonar
+
+
+  # SonarQube plugins to install
+  sonar_plugins: []
+  # - { name: "plugin name", version: "1.0", commercial: false, url: 'optional'}
 
   # Use the embedded H2 database, not for production environmnet
   sonar_db_embedded: true

@@ -40,3 +40,4 @@
   when: not prereq_java.rc == 0
 
 - include: setup_sonarqube.yml
+- include: setup_plugins.yml
