@@ -13,6 +13,8 @@ Restart=on-failure
 RestartSec=10
 PIDFile={{ sonar_daemon_dir }}/SonarQube.pid
 User={{ sonar_user }}
+Group={{ sonar_group }}
+LimitNOFILE={{ sonar_limitnofile }}
 
 [Install]
 WantedBy=multi-user.target

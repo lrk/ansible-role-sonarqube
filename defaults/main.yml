@@ -30,6 +30,9 @@ sonar_group: sonar
 # SonarQube system user
 sonar_user: sonar
 
+# SonarQube service LimitNOFILE parameter
+sonar_limitnofile: 65536
+
 # SonarQube plugins to install
 sonar_plugins: []
 # - { name: "plugin name", version: "1.0", commercial: false, url: 'optional'}
