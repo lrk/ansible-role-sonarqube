@@ -78,6 +78,8 @@ Available variables along with default values are listed below (see `defaults/ma
   # SonarQube system user
   sonar_user: sonar
 
+  # SonarQube service LimitNOFILE parameter
+  sonar_limitnofile: 65536
 
   # SonarQube plugins to install
   sonar_plugins: []
