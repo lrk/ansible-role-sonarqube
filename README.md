@@ -18,6 +18,7 @@ For production environment, make sure to set the `sonar_db_embedded` variable to
 
 SonarQube support following databases: MySQL, Oracle, PostgreSQL and Microsoft SQLServer.
 
+For further informations, please dive into [SonarQube requirements](https://docs.sonarqube.org/display/SONAR/Requirements)
 
 
 SonarQube plugin installation
