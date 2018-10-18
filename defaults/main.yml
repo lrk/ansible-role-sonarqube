@@ -22,7 +22,7 @@ sonar_data_dir: "{{ sonar_base_dir }}/data"
 sonar_temp_dir: "{{ sonar_base_dir }}/temp"
 
 # SonarQube version to install
-sonar_version: 5.6.7
+sonar_version: 7.3
 
 # SonarQube system group
 sonar_group: sonar
