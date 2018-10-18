@@ -1,16 +1,16 @@
 ---
 
-- name: change download url
+- name: "Overwrite Sonar download url"
   set_fact:
     sonar_download_url: "{{ __sonar_download_url }}"
   when: sonar_download_url is not defined
 
-- name: change plugin base url
+- name: "Overwrite Sonar plugin base url"
   set_fact:
     sonar_plugin_baseurl: "{{ __sonar_plugin_baseurl }}"
   when: sonar_plugin_baseurl is not defined
 
-- name: change commercial plugin base url
+- name: "Overwrite Sonar commercial plugin base url"
   set_fact:
     sonar_commercial_plugin_baseurl: "{{ __sonar_commercial_plugin_baseurl }}"
   when: sonar_commercial_plugin_baseurl is not defined
