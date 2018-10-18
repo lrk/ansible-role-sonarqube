@@ -8,7 +8,7 @@
 - block:
   - name: "Download SonarQube binaries"
     get_url:
-      url: "{{ __sonar_download_url }}"
+      url: "{{ sonar_download_url }}"
       dest: "/tmp/{{ __sonar_archive }}"
     retries: 5
     delay: 10

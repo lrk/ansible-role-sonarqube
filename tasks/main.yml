@@ -39,5 +39,6 @@
     msg: "JAVA is not installed or configured"
   when: not prereq_java.rc == 0
 
+- include: setup_prepare.yml
 - include: setup_sonarqube.yml
 - include: setup_plugins.yml
