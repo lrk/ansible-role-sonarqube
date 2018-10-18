@@ -298,7 +298,17 @@ Available variables along with default values are listed below (see `defaults/ma
   # Delay in seconds between processing of notification queue. Default is 60 seconds.
   sonar_notifications_delay: 60
 
+  #--------------------------------------------------------------------------------------------------
+  # OVERRIDE DEFAULT INTERNAL VALUES
 
+  # If present, overwrite the default sonarqube download url.
+  sonar_download_url: "https://your_url"
+
+  # If present, overwrite the default sonarqube plugin base url.
+  sonar_plugin_baseurl: "https://your_url"
+
+  # If present, overwrite the default sonarqube commercial plugin base url.
+  sonar_commercial_plugin_baseurl: "https://your_url"
   #--------------------------------------------------------------------------------------------------
   # DEVELOPMENT - only for developers
   # The following properties MUST NOT be used in production environments.
