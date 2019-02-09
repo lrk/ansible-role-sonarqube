@@ -65,12 +65,12 @@ sonar.search.host={{ sonar_search_host | default('127.0.0.1') }}
 # UPDATE CENTER
 
 sonar.updatecenter.activate={{ sonar_updatecenter_activate | default('true') | lower }}
+
 {% if (http_proxy_host is defined) and (http_proxy_host != "") %}
 http.proxyHost={{ http_proxy_host }}
 {% endif %}
 {% if (http_proxy_port is defined) and (http_proxy_port != "") %}
-http.proxyPort=
-{{ http_proxy_port }}
+http.proxyPort={{ http_proxy_port }}
 {% endif %}
 {% if (https_proxy_host is defined) and (https_proxy_host != "") %}
 https.proxyHost={{ https_proxy_host }}
