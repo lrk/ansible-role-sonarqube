@@ -23,6 +23,6 @@
         group: "{{ sonar_group }}"
       retries: 5
       delay: 10
+      notify:
+        - "restart SonarQube service"
   with_items: "{{ sonar_plugins }}"
-  notify:
-    - "restart SonarQube service"
