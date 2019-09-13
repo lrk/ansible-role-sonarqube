@@ -41,7 +41,7 @@ sonar.web.http.acceptCount={{ sonar_web_http_accept_count | default('25') }}
 sonar.ajp.port={{ sonar_ajp_port | default('-1') }}
 
 
-{%- if sonar_ldap %} 
+{%- if (sonar_ldap is defined) %} 
 #--------------------------------------------------------------------------------------------------
 # LDAP AUTH
 sonar.security.realm=LDAP
