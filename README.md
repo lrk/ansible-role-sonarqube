@@ -291,6 +291,20 @@ Available variables along with default values are listed below (see `defaults/ma
   # If SonarQube is behind a reverse proxy, then the following value allows to display the correct remote IP address:
   sonar_web_access_logs_pattern: "%i{X-Forwarded-For} %l %u [%t] \"%r\" %s %b \"%i{Referer}\" \"%i{User-Agent}\""
 
+  #--------------------------------------------------------------------------------------------------
+  # LDAP
+  # Ldap configuration for ldap auth plugin more info https://docs.sonarqube.org/latest/instance-administration/delegated-auth/
+  sonar_ldap:
+    url: 'ldap://your_ldap_url'
+    bind_dn: 'cn=sonaruser,o=example,o=com'
+    bind_password: 'MyBindPassword'
+    user_base_dn: 'o=users,o=example,o=com'
+    user_request: '(&(objectClass=inetOrgPerson)(uid={login}))'
+    user_real_name_attribute: 'cn'
+    user_email_attribute: 'mail'
+    group_base_dn: 'o=groups,o=example,o=com'
+    group_request: '(&(objectClass=groupOfNames)(member={dn}))'
+    group_id_attribute: 'cn'
 
   #--------------------------------------------------------------------------------------------------
   # OTHERS

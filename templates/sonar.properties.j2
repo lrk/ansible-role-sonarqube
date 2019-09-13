@@ -40,6 +40,46 @@ sonar.web.http.minThreads={{ sonar_web_http_min_threads | default('5') }}
 sonar.web.http.acceptCount={{ sonar_web_http_accept_count | default('25') }}
 sonar.ajp.port={{ sonar_ajp_port | default('-1') }}
 
+#--------------------------------------------------------------------------------------------------
+# LDAP AUTH
+{% if sonar_ldap is defined %} 
+sonar.security.realm=LDAP
+{% if sonar_ldap.authenticator_downcase is defined %} 
+sonar.authenticator.downcase={{ sonar_ldap.authenticator_downcase }}
+{%  endif  %}  
+ldap.url={{ sonar_ldap.url }}
+{% if sonar_ldap.bind_dn is defined %}  
+ldap.bindDn={{ sonar_ldap.bind_dn }}
+{%  endif  %}  
+{% if sonar_ldap.bind_password is defined %}  
+ldap.bindPassword={{ sonar_ldap.bind_password }}
+{%  endif  %}  
+{% if sonar_ldap.authentication is defined %}  
+ldap.authentication={{ sonar_ldap.authentication }}
+{%  endif  %}  
+{% if sonar_ldap.user_base_dn is defined %}  
+ldap.user.baseDn={{ sonar_ldap.user_base_dn }}
+{%  endif  %}  
+{% if sonar_ldap.user_request is defined %}  
+ldap.user.request={{ sonar_ldap.user_request }}
+{%  endif  %}  
+{% if sonar_ldap.user_real_name_attribute is defined %}  
+ldap.user.realNameAttribute={{ sonar_ldap.user_real_name_attribute }}
+{%  endif  %}  
+{% if sonar_ldap.user_email_attribute is defined %}  
+ldap.user.emailAttribute={{ sonar_ldap.user_email_attribute }}
+{%  endif  %}  
+{% if sonar_ldap.group_base_dn is defined %}  
+ldap.group.baseDn={{ sonar_ldap.group_base_dn }}
+{%  endif  %}  
+{% if sonar_ldap.group_request is defined %}  
+ldap.group.request={{ sonar_ldap.group_request }}
+{%  endif  %}  
+{% if sonar_ldap.group_id_attribute is defined %}  
+ldap.group.idAttribute={{ sonar_ldap.group_id_attribute }}
+{%  endif  %}  
+
+{% endif %} 
 
 #--------------------------------------------------------------------------------------------------
 # COMPUTE ENGINE
