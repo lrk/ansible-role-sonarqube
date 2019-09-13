@@ -11,8 +11,13 @@ env:
   # - distro: ubuntu1404
   # - distro: ubuntu1204
   # - distro: debian8
-
+  
+install:
+  - pip install ansible-lint
+  - ansible-lint --version
+  
 script:
+  - ansible-list .
   # Download test shim.
   - wget -O ${PWD}/tests/test.sh https://gist.githubusercontent.com/geerlingguy/73ef1e5ee45d8694570f334be385e181/raw/
   - chmod +x ${PWD}/tests/test.sh
