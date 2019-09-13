@@ -242,6 +242,20 @@ sonar_web_accessLogs_enable: true
 # If SonarQube is behind a reverse proxy, then the following value allows to display the correct remote IP address:
 sonar_web_access_logs_pattern: "%i{X-Forwarded-For} %l %u [%t] \"%r\" %s %b \"%i{Referer}\" \"%i{User-Agent}\""
 
+#--------------------------------------------------------------------------------------------------
+# LDAP
+# Ldap configuration for ldap auth plugin more info https://docs.sonarqube.org/latest/instance-administration/delegated-auth/
+sonar_ldap:
+  authenticator_downcase: false
+  authentication: simple
+  contextFactoryClass: com.sun.jndi.ldap.LdapCtxFactory
+  StartTLS: false
+  followReferrals: true
+  user_request: '(&(objectClass=inetOrgPerson)(uid={login}))'
+  user_realNameAttribute: cn
+  user_emailAttribute: mail
+  group_request: dn
+  group_idAttribute: cn
 
 #--------------------------------------------------------------------------------------------------
 # OTHERS

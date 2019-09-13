@@ -40,46 +40,39 @@ sonar.web.http.minThreads={{ sonar_web_http_min_threads | default('5') }}
 sonar.web.http.acceptCount={{ sonar_web_http_accept_count | default('25') }}
 sonar.ajp.port={{ sonar_ajp_port | default('-1') }}
 
+
+{%- if sonar_ldap %} 
 #--------------------------------------------------------------------------------------------------
 # LDAP AUTH
-{% if sonar_ldap is defined %} 
 sonar.security.realm=LDAP
-{% if sonar_ldap.authenticator_downcase is defined %} 
-sonar.authenticator.downcase={{ sonar_ldap.authenticator_downcase }}
-{%  endif  %}  
-ldap.url={{ sonar_ldap.url }}
-{% if sonar_ldap.bind_dn is defined %}  
+sonar.authenticator.downcase={{ sonar_ldap.authenticator_downcase| default('false') }}
+ldap.url={{ sonar_ldap.url | mandatory }}
+{% if (sonar_ldap.bind_dn is defined)and(sonar_ldap.bind_dn != "" ) %}  
 ldap.bindDn={{ sonar_ldap.bind_dn }}
 {%  endif  %}  
-{% if sonar_ldap.bind_password is defined %}  
+{% if (sonar_ldap.bind_password is defined) and (sonar_ldap.bind_password != "" ) %}  
 ldap.bindPassword={{ sonar_ldap.bind_password }}
 {%  endif  %}  
-{% if sonar_ldap.authentication is defined %}  
-ldap.authentication={{ sonar_ldap.authentication }}
-{%  endif  %}  
-{% if sonar_ldap.user_base_dn is defined %}  
-ldap.user.baseDn={{ sonar_ldap.user_base_dn }}
-{%  endif  %}  
-{% if sonar_ldap.user_request is defined %}  
-ldap.user.request={{ sonar_ldap.user_request }}
-{%  endif  %}  
-{% if sonar_ldap.user_real_name_attribute is defined %}  
-ldap.user.realNameAttribute={{ sonar_ldap.user_real_name_attribute }}
-{%  endif  %}  
-{% if sonar_ldap.user_email_attribute is defined %}  
-ldap.user.emailAttribute={{ sonar_ldap.user_email_attribute }}
-{%  endif  %}  
-{% if sonar_ldap.group_base_dn is defined %}  
-ldap.group.baseDn={{ sonar_ldap.group_base_dn }}
-{%  endif  %}  
-{% if sonar_ldap.group_request is defined %}  
-ldap.group.request={{ sonar_ldap.group_request }}
-{%  endif  %}  
-{% if sonar_ldap.group_id_attribute is defined %}  
-ldap.group.idAttribute={{ sonar_ldap.group_id_attribute }}
-{%  endif  %}  
+ldap.authentication={{ sonar_ldap.authentication |default('simple') }}
+{% if ( sonar_ldap.realm is defined) and (sonar_ldap.realm != "" ) %} 
+ldap.user.request={{ sonar_ldap.realm }}
+{%  endif  %}
+ldap.contextFactoryClass={{ sonar_ldap.contextFactoryClass | default('com.sun.jndi.ldap.LdapCtxFactory') }}
+ldap.StartTLS={{ sonar_ldap.StartTLS|default('false')}}
+ldap.followReferrals={{ sonar_ldap.followReferrals | default('true') }}
 
-{% endif %} 
+ldap.user.baseDn={{ sonar_ldap.user_base_dn | mandatory }}
+ldap.user.request={{ sonar_ldap.user_request | default('(&(objectClass=inetOrgPerson)(uid={login}))') }}
+ldap.user.realNameAttribute={{ sonar_ldap.user_real_name_attribute |default('cn') }}
+ldap.user.emailAttribute={{ sonar_ldap.user_email_attribute | default('mail') }}
+
+{% if (sonar_ldap.group_base_dn) and (sonar_ldap.group_base_dn != "" ) %}  
+ldap.group.baseDn={{ sonar_ldap.group_base_dn }}
+{%  endif  %} 
+ldap.group.request={{ sonar_ldap.group_request |default('(&(objectClass=groupOfUniqueNames)(uniqueMember={dn}))') }}
+ldap.group.idAttribute={{ sonar_ldap.group_id_attribute |default('cn') }}
+
+{%- endif %} 
 
 #--------------------------------------------------------------------------------------------------
 # COMPUTE ENGINE

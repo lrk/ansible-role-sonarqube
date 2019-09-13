@@ -295,17 +295,24 @@ Available variables along with default values are listed below (see `defaults/ma
   # LDAP
   # Ldap configuration for ldap auth plugin more info https://docs.sonarqube.org/latest/instance-administration/delegated-auth/
   sonar_ldap:
+    #ldap server url is mandatory
     url: 'ldap://your_ldap_url'
+    # user dn for connecting to ldap, otherwise anonymous bind will be used
     bind_dn: 'cn=sonaruser,o=example,o=com'
+    # user password  for connectiong to ldap, otherwise anonymous bind will be used
     bind_password: 'MyBindPassword'
     user_base_dn: 'o=users,o=example,o=com'
+    # default settings
+    authenticator_downcase: false
+    authentication: simple
+    contextFactoryClass: com.sun.jndi.ldap.LdapCtxFactory
+    StartTLS: false
+    followReferrals: true
     user_request: '(&(objectClass=inetOrgPerson)(uid={login}))'
-    user_real_name_attribute: 'cn'
-    user_email_attribute: 'mail'
-    group_base_dn: 'o=groups,o=example,o=com'
-    group_request: '(&(objectClass=groupOfNames)(member={dn}))'
-    group_id_attribute: 'cn'
-
+    user_realNameAttribute: cn
+    user_emailAttribute: mail
+    group_request: dn
+    group_idAttribute: cn
   #--------------------------------------------------------------------------------------------------
   # OTHERS
 
