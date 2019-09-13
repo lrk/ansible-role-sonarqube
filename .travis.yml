@@ -13,7 +13,7 @@ env:
   # - distro: debian8
   
 install:
-  - pip install ansible-lint
+  - pip install --user ansible-lint
   - ansible-lint --version
   
 script:
