@@ -3,7 +3,7 @@ galaxy_info:
   description: "An Ansible Role that install SonarQube."
   license: "Apache License Version 2.0"
 
-  min_ansible_version: 2.2
+  min_ansible_version: 2.4
 
   platforms:
   - name: EL

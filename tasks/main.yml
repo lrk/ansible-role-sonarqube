@@ -1,7 +1,6 @@
 ---
 # tasks file for ansible-role-sonarqube/
 
-
 - name: "Create SonarQube system group"
   group:
     name: "{{ sonar_group }}"
@@ -39,6 +38,11 @@
     msg: "JAVA is not installed or configured"
   when: not prereq_java.rc == 0
 
-- include: setup_prepare.yml
-- include: setup_sonarqube.yml
-- include: setup_plugins.yml
+- include_tasks: setup_prepare.yml
+
+- include_tasks: setup_sonarqube.yml
+
+- include_tasks: setup_plugins.yml
+  with_items: "{{ sonar_plugins }}"
+  loop_control:
+    loop_var: "sonar_cplugin"
