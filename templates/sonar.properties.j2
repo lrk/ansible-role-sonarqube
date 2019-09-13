@@ -99,13 +99,13 @@ sonar.updatecenter.activate={{ sonar_updatecenter_activate | default('true') | 
 {% if (http_proxy_host is defined) and (http_proxy_host | length > 0) %}
 http.proxyHost={{ http_proxy_host }}
 {% endif %}
-{% if (http_proxy_port is defined) and (http_proxy_port | length > 0) %}
+{% if (http_proxy_port is defined) and (http_proxy_port | int > 0) %}
 http.proxyPort={{ http_proxy_port }}
 {% endif %}
 {% if (https_proxy_host is defined) and (https_proxy_host | length > 0) %}
 https.proxyHost={{ https_proxy_host }}
 {% endif %}
-{% if (https_proxy_port is defined) and (https_proxy_port | length > 0) %}
+{% if (https_proxy_port is defined) and (https_proxy_port | int > 0) %}
 https.proxyPort={{ https_proxy_port }}
 {% endif %}
 {% if (http_auth_ntlm_domain is defined) and (http_auth_ntlm_domain | length > 0) %}
@@ -114,7 +114,7 @@ http.auth.ntlm.domain={{ http_auth_ntlm_domain }}
 {% if (socks_proxy_host is defined) and (socks_proxy_host | length > 0) %}
 socksProxyHost={{ socks_proxy_host }}
 {% endif %}
-{% if (socks_proxy_port is defined) and (socks_proxy_port | length > 0) %}
+{% if (socks_proxy_port is defined) and (socks_proxy_port | int > 0) %}
 socksProxyPort={{ socks_proxy_port }}
 {% endif %}
 # Proxy authentication (used for HTTP, HTTPS and SOCKS proxies)
@@ -158,6 +158,6 @@ sonar_web_dev={{ sonar_web_dev  | lower}}
 {% if (sonar_web_dev_sources is defined) and (sonar_web_dev_sources | length > 0) %}
 sonar.web.dev.sources={{ sonar_web_dev_sources }}
 {% endif %}
-{% if (sonar_search_http_port is defined) and (sonar_search_http_port != -1) %}
+{% if (sonar_search_http_port is defined) and (sonar_search_http_port | int > 0) %}
 sonar.search.httpPort={{ sonar_search_http_port }}
 {% endif %}
