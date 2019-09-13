@@ -1,12 +1,24 @@
 ---
 - name: "Install SonarQube plugins"
-  get_url:
-    url: "{% if item.url is defined and item.url != '' %}{{ item.url }}{% else %}{% if item.commercial %}{{ sonar_commercial_plugin_baseurl }}{% else %}{{ sonar_plugin_baseurl }}{% endif %}/{{ item.name }}/{{ item.name }}-{{ item.version }}.jar{% endif %}"
-    dest: "{{ __sonar_plugin_home }}/{{ item.name }}-{{ item.version }}.jar"
-    owner: "{{ sonar_user }}"
-    group: "{{ sonar_group }}"
+  block:
+    - set_fact:
+        current_plugin_jar_file: "{{ item.name }}-{{ item.version }}.jar"
+
+    - set_fact:
+        current_plugin_url: item.url
+      when: item.url is defined and item.url | length > 0
+
+    - set_fact:
+        current_plugin_url: "{{ item.commercial ? sonar_commercial_plugin_baseurl : sonar_plugin_baseurl }}/{{ item.name }}/{{ current_plugin_jar_file }}"
+      when: current_plugin_url is not defined or current_plugin_url | length <= 0
+
+    - get_url:
+        url: "{{ current_plugin_url }}"
+        dest: "{{ __sonar_plugin_home }}/{{ current_plugin_jar_file }}"
+        owner: "{{ sonar_user }}"
+        group: "{{ sonar_group }}"
+      retries: 5
+      delay: 10
   with_items: "{{ sonar_plugins }}"
-  retries: 5
-  delay: 10
   notify:
     - "restart SonarQube service"

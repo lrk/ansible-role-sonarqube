@@ -24,14 +24,14 @@ sonar.jdbc.timeBetweenEvictionRunsMillis={{ sonar_jdbc_time_between_eviction_run
 #--------------------------------------------------------------------------------------------------
 # WEB SERVER
 
-{% if (sonar_web_java_opts is defined) and (sonar_web_java_opts != "") %}
+{% if (sonar_web_java_opts is defined) and (sonar_web_java_opts | length > 0) %}
 sonar.web.javaOpts={{ sonar_web_java_opts }}
 {% endif %}
-{% if (sonar_web_java_additional_opts is defined) and (sonar_web_java_additional_opts != "") %}
+{% if (sonar_web_java_additional_opts is defined) and (sonar_web_java_additional_opts | length > 0) %}
 sonar.web.javaAdditionalOpts={{ sonar_web_java_additional_opts | default('') }}
 {% endif %}
 sonar.web.host={{ sonar_web_host | default('0.0.0.0') }}
-{% if (sonar_web_context is defined) and (sonar_web_context != "") %}
+{% if (sonar_web_context is defined) and (sonar_web_context | length > 0) %}
 sonar.web.context={{ sonar_web_context }}
 {% endif %}
 sonar.web.port={{ sonar_web_port | default('9000') }}
@@ -41,20 +41,20 @@ sonar.web.http.acceptCount={{ sonar_web_http_accept_count | default('25') }}
 sonar.ajp.port={{ sonar_ajp_port | default('-1') }}
 
 
-{%- if (sonar_ldap is defined) %} 
+{%- if (sonar_ldap is defined) %}
 #--------------------------------------------------------------------------------------------------
 # LDAP AUTH
 sonar.security.realm=LDAP
 sonar.authenticator.downcase={{ sonar_ldap.authenticator_downcase | default('false') }}
 ldap.url={{ sonar_ldap.url | mandatory }}
-{% if (sonar_ldap.bind_dn is defined)and(sonar_ldap.bind_dn != "" ) %}  
+{% if (sonar_ldap.bind_dn is defined)and(sonar_ldap.bind_dn | length > 0 ) %}
 ldap.bindDn={{ sonar_ldap.bind_dn }}
-{%  endif  %}  
-{% if (sonar_ldap.bind_password is defined) and (sonar_ldap.bind_password != "" ) %}  
+{%  endif  %}
+{% if (sonar_ldap.bind_password is defined) and (sonar_ldap.bind_password | length > 0 ) %}
 ldap.bindPassword={{ sonar_ldap.bind_password }}
-{%  endif  %}  
+{%  endif  %}
 ldap.authentication={{ sonar_ldap.authentication | default('simple') }}
-{% if ( sonar_ldap.realm is defined) and (sonar_ldap.realm != "" ) %} 
+{% if ( sonar_ldap.realm is defined) and (sonar_ldap.realm | length > 0 ) %}
 ldap.security.realm={{ sonar_ldap.realm }}
 {%  endif  %}
 ldap.contextFactoryClass={{ sonar_ldap.context_factory_class | default('com.sun.jndi.ldap.LdapCtxFactory') }}
@@ -64,20 +64,20 @@ ldap.user.baseDn={{ sonar_ldap.user_base_dn | mandatory }}
 ldap.user.request={{ sonar_ldap.user_request | default('(&(objectClass=inetOrgPerson)(uid={login}))') }}
 ldap.user.realNameAttribute={{ sonar_ldap.user_real_name_attribute | default('cn') }}
 ldap.user.emailAttribute={{ sonar_ldap.user_email_attribute | default('mail') }}
-{% if (sonar_ldap.group_base_dn) and (sonar_ldap.group_base_dn != "" ) %}  
+{% if (sonar_ldap.group_base_dn) and (sonar_ldap.group_base_dn | length > 0 ) %}
 ldap.group.baseDn={{ sonar_ldap.group_base_dn }}
-{%  endif  %} 
+{%  endif  %}
 ldap.group.request={{ sonar_ldap.group_request | default('(&(objectClass=groupOfUniqueNames)(uniqueMember={dn}))') }}
 ldap.group.idAttribute={{ sonar_ldap.group_id_attribute | default('cn') }}
-{%- endif %} 
+{%- endif %}
 
 #--------------------------------------------------------------------------------------------------
 # COMPUTE ENGINE
 
-{% if (sonar_ce_java_opts is defined) and (sonar_ce_java_opts != "") %}
+{% if (sonar_ce_java_opts is defined) and (sonar_ce_java_opts | length > 0) %}
 sonar.ce.javaOpts={{ sonar_ce_java_opts }}
 {% endif %}
-{% if (sonar_ce_java_additional_opts is defined) and (sonar_ce_java_additional_opts != "") %}
+{% if (sonar_ce_java_additional_opts is defined) and (sonar_ce_java_additional_opts | length > 0) %}
 sonar.ce.javaAdditionalOpts={{ sonar_ce_java_additional_opts }}
 {% endif %}
 sonar.ce.workerCount={{ sonar_ce_worker_count | default('1') }}
@@ -96,32 +96,32 @@ sonar.search.host={{ sonar_search_host | default('127.0.0.1') }}
 
 sonar.updatecenter.activate={{ sonar_updatecenter_activate | default('true') | lower }}
 
-{% if (http_proxy_host is defined) and (http_proxy_host != "") %}
+{% if (http_proxy_host is defined) and (http_proxy_host | length > 0) %}
 http.proxyHost={{ http_proxy_host }}
 {% endif %}
-{% if (http_proxy_port is defined) and (http_proxy_port != "") %}
+{% if (http_proxy_port is defined) and (http_proxy_port | length > 0) %}
 http.proxyPort={{ http_proxy_port }}
 {% endif %}
-{% if (https_proxy_host is defined) and (https_proxy_host != "") %}
+{% if (https_proxy_host is defined) and (https_proxy_host | length > 0) %}
 https.proxyHost={{ https_proxy_host }}
 {% endif %}
-{% if (https_proxy_port is defined) and (https_proxy_port != "") %}
+{% if (https_proxy_port is defined) and (https_proxy_port | length > 0) %}
 https.proxyPort={{ https_proxy_port }}
 {% endif %}
-{% if (http_auth_ntlm_domain is defined) and (http_auth_ntlm_domain != "") %}
+{% if (http_auth_ntlm_domain is defined) and (http_auth_ntlm_domain | length > 0) %}
 http.auth.ntlm.domain={{ http_auth_ntlm_domain }}
 {% endif %}
-{% if (socks_proxy_host is defined) and (socks_proxy_host != "") %}
+{% if (socks_proxy_host is defined) and (socks_proxy_host | length > 0) %}
 socksProxyHost={{ socks_proxy_host }}
 {% endif %}
-{% if (socks_proxy_port is defined) and (socks_proxy_port != "") %}
+{% if (socks_proxy_port is defined) and (socks_proxy_port | length > 0) %}
 socksProxyPort={{ socks_proxy_port }}
 {% endif %}
 # Proxy authentication (used for HTTP, HTTPS and SOCKS proxies)
-{% if (http_proxy_user is defined) and (http_proxy_user != "") %}
+{% if (http_proxy_user is defined) and (http_proxy_user | length > 0) %}
 http.proxyUser={{ http_proxy_user }}
 {% endif %}
-{% if (http_proxy_password is defined) and (http_proxy_password != "") %}
+{% if (http_proxy_password is defined) and (http_proxy_password | length > 0) %}
 http.proxyPassword={{ http_proxy_password }}
 {% endif %}
 
@@ -155,7 +155,7 @@ sonar.path.temp={{ sonar_temp_dir | default('temp') }}
 {% if (sonar_web_dev is defined) and (sonar_web_dev != False) %}
 sonar_web_dev={{ sonar_web_dev  | lower}}
 {% endif %}
-{% if (sonar_web_dev_sources is defined) and (sonar_web_dev_sources != '') %}
+{% if (sonar_web_dev_sources is defined) and (sonar_web_dev_sources | length > 0) %}
 sonar.web.dev.sources={{ sonar_web_dev_sources }}
 {% endif %}
 {% if (sonar_search_http_port is defined) and (sonar_search_http_port != -1) %}

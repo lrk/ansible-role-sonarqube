@@ -10,7 +10,7 @@
 - name: "Create SonarQube system user"
   user:
     name: "{{ sonar_user }}"
-    group: "{{ sonar_group }}"
+    group: "{{ sonar_group }}"
     createhome: no
     shell: "/sbin/nologin"
     comment: "SonarQube System user"
