@@ -66,5 +66,6 @@
     owner: "{{ sonar_user }}"
     group: "{{ sonar_group }}"
     mode: "u=rw,g=,o="
+  no_log: true
   notify:
       - "restart SonarQube service"
