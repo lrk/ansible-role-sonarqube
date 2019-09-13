@@ -45,7 +45,7 @@ sonar.ajp.port={{ sonar_ajp_port | default('-1') }}
 #--------------------------------------------------------------------------------------------------
 # LDAP AUTH
 sonar.security.realm=LDAP
-sonar.authenticator.downcase={{ sonar_ldap.authenticator_downcase| default('false') }}
+sonar.authenticator.downcase={{ sonar_ldap.authenticator_downcase | default('false') }}
 ldap.url={{ sonar_ldap.url | mandatory }}
 {% if (sonar_ldap.bind_dn is defined)and(sonar_ldap.bind_dn != "" ) %}  
 ldap.bindDn={{ sonar_ldap.bind_dn }}
@@ -53,25 +53,22 @@ ldap.bindDn={{ sonar_ldap.bind_dn }}
 {% if (sonar_ldap.bind_password is defined) and (sonar_ldap.bind_password != "" ) %}  
 ldap.bindPassword={{ sonar_ldap.bind_password }}
 {%  endif  %}  
-ldap.authentication={{ sonar_ldap.authentication |default('simple') }}
+ldap.authentication={{ sonar_ldap.authentication | default('simple') }}
 {% if ( sonar_ldap.realm is defined) and (sonar_ldap.realm != "" ) %} 
-ldap.user.request={{ sonar_ldap.realm }}
+ldap.security.realm={{ sonar_ldap.realm }}
 {%  endif  %}
-ldap.contextFactoryClass={{ sonar_ldap.contextFactoryClass | default('com.sun.jndi.ldap.LdapCtxFactory') }}
-ldap.StartTLS={{ sonar_ldap.StartTLS|default('false')}}
-ldap.followReferrals={{ sonar_ldap.followReferrals | default('true') }}
-
+ldap.contextFactoryClass={{ sonar_ldap.context_factory_class | default('com.sun.jndi.ldap.LdapCtxFactory') }}
+ldap.StartTLS={{ sonar_ldap.start_tls | default('false') }}
+ldap.followReferrals={{ sonar_ldap.follow_referrals | default('true') }}
 ldap.user.baseDn={{ sonar_ldap.user_base_dn | mandatory }}
 ldap.user.request={{ sonar_ldap.user_request | default('(&(objectClass=inetOrgPerson)(uid={login}))') }}
-ldap.user.realNameAttribute={{ sonar_ldap.user_real_name_attribute |default('cn') }}
+ldap.user.realNameAttribute={{ sonar_ldap.user_real_name_attribute | default('cn') }}
 ldap.user.emailAttribute={{ sonar_ldap.user_email_attribute | default('mail') }}
-
 {% if (sonar_ldap.group_base_dn) and (sonar_ldap.group_base_dn != "" ) %}  
 ldap.group.baseDn={{ sonar_ldap.group_base_dn }}
 {%  endif  %} 
-ldap.group.request={{ sonar_ldap.group_request |default('(&(objectClass=groupOfUniqueNames)(uniqueMember={dn}))') }}
-ldap.group.idAttribute={{ sonar_ldap.group_id_attribute |default('cn') }}
-
+ldap.group.request={{ sonar_ldap.group_request | default('(&(objectClass=groupOfUniqueNames)(uniqueMember={dn}))') }}
+ldap.group.idAttribute={{ sonar_ldap.group_id_attribute | default('cn') }}
 {%- endif %} 
 
 #--------------------------------------------------------------------------------------------------
