@@ -10,7 +10,11 @@ An Ansible Role that install [SonarQube](https://www.sonarqube.org).
 
 Supported OSes
 --------------
-- Centos 7
+This role as been tested on the following OSes:
+
+- EL - 7
+- Ubuntu -  Bionic / Xenial
+- Debian - Buster / Stretch / Jessie
 
 Requirements
 ------------
@@ -304,7 +308,7 @@ Available variables along with default values are listed below (see `defaults/ma
   # sonar_ldap:
   #     authenticator_downcase: false           
   #     url: 'ldap://your_ldap_url'             
-  #     bind_dn: 'cn=sonaruser,o=example,o=com' 
+  #     bind_dn: 'cn=sonaruser,o=example,o=com'
   #     bind_password: 'MyBindPassword'         
   #     user_base_dn: 'o=users,o=example,o=com'    
   #     authentication: simple
@@ -322,7 +326,7 @@ Available variables along with default values are listed below (see `defaults/ma
   #
   # default: undefined
   # sonar_ldap:
-  
+
   #--------------------------------------------------------------------------------------------------
   # OTHERS
 
