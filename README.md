@@ -13,8 +13,7 @@ Supported OSes
 This role as been tested on the following OSes:
 
 - EL - 7
-- Ubuntu -  Bionic / Xenial
-- Debian - Buster / Stretch / Jessie
+- Debian -  Stretch / Jessie
 
 Requirements
 ------------
@@ -42,7 +41,6 @@ You can list all plugin you need in the `sonar_plugins` variables, with the foll
 ```
 # sonar_plugins variable example:
 sonar_plugins:
-- { name: "sonar-ldap-plugin", version: "2.0", commercial: false}
 - { name: "sonar-city-model-plugin", version: "3.3", commercial: true, url: "http://www.qalitax.com/descargas/product/sonar-city-model-plugin-3.3.jar?customerSurnames=update-center&customerCompany=sonar-update-center&customerName=sonarqube&customerEmail=downloads@excentia.es"}
 
 ```

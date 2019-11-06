@@ -3,10 +3,6 @@
   hosts: all
   vars:
     sonar_plugins:
-      - name: "sonar-ldap-plugin"
-        version: "2.0"
-        commercial: false
-
       - name: "sonar-l10n-pt"
         version: "6.4"
         commercial: false
@@ -16,9 +12,6 @@
         version: "1.14"
         commercial: false
         url: "https://github.com/acalero/sonar-l10n-es/releases/download/sonar-l10n-es-plugin-1.14/sonar-l10n-es-plugin-1.14.jar"
-
-    http_proxy_host: "127.0.0.1"
-    http_proxy_port: 8888
 
   pre_tasks:
     - name: "Ensure apt cache is up to date"

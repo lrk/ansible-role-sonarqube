@@ -15,7 +15,6 @@ galaxy_info:
         - Xenial
     - name: Debian
       versions:
-        - Buster
         - Stretch
         - Jessie
 
