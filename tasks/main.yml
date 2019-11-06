@@ -38,6 +38,10 @@
     msg: "JAVA is not installed or configured"
   when: not prereq_java.rc == 0
 
+- name: "Execute Debian specific tasks"
+  include_tasks: setup_debian.yml
+  when: ansible_os_family == 'Debian'
+
 - include_tasks: setup_prepare.yml
 
 - include_tasks: setup_sonarqube.yml
