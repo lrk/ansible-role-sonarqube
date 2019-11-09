@@ -10,7 +10,10 @@ An Ansible Role that install [SonarQube](https://www.sonarqube.org).
 
 Supported OSes
 --------------
-- Centos 7
+This role as been tested on the following OSes:
+
+- EL - 7
+- Debian -  Stretch / Jessie
 
 Requirements
 ------------
@@ -38,7 +41,6 @@ You can list all plugin you need in the `sonar_plugins` variables, with the foll
 ```
 # sonar_plugins variable example:
 sonar_plugins:
-- { name: "sonar-ldap-plugin", version: "2.0", commercial: false}
 - { name: "sonar-city-model-plugin", version: "3.3", commercial: true, url: "http://www.qalitax.com/descargas/product/sonar-city-model-plugin-3.3.jar?customerSurnames=update-center&customerCompany=sonar-update-center&customerName=sonarqube&customerEmail=downloads@excentia.es"}
 
 ```
@@ -304,7 +306,7 @@ Available variables along with default values are listed below (see `defaults/ma
   # sonar_ldap:
   #     authenticator_downcase: false           
   #     url: 'ldap://your_ldap_url'             
-  #     bind_dn: 'cn=sonaruser,o=example,o=com' 
+  #     bind_dn: 'cn=sonaruser,o=example,o=com'
   #     bind_password: 'MyBindPassword'         
   #     user_base_dn: 'o=users,o=example,o=com'    
   #     authentication: simple
@@ -322,7 +324,7 @@ Available variables along with default values are listed below (see `defaults/ma
   #
   # default: undefined
   # sonar_ldap:
-  
+
   #--------------------------------------------------------------------------------------------------
   # OTHERS
 

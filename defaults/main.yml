@@ -172,7 +172,7 @@ sonar_ce_worker_count: 1
 #    is not enabled by default on your environment:
 #    http://docs.oracle.com/javase/8/docs/technotes/guides/vm/server-class.html
 #
-sonar_search_java_opts: "-Xmx1G -Xms256m -Xss256k -Djava.net.preferIPv4Stack=true -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=75 -XX:+UseCMSInitiatingOccupancyOnly -XX:+HeapDumpOnOutOfMemoryError"
+sonar_search_java_opts: "-Xmx1G -Xms256m -Djava.net.preferIPv4Stack=true -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=75 -XX:+UseCMSInitiatingOccupancyOnly -XX:+HeapDumpOnOutOfMemoryError"
 
 # Same as previous property, but allows to not repeat all other settings like -Xmx
 sonar_search_java_additional_opts: ""
@@ -249,11 +249,11 @@ sonar_web_access_logs_pattern: "%i{X-Forwarded-For} %l %u [%t] \"%r\" %s %b \"%i
 #
 # Example:
 # sonar_ldap:
-#     authenticator_downcase: false           
-#     url: 'ldap://your_ldap_url'             
-#     bind_dn: 'cn=sonaruser,o=example,o=com' 
-#     bind_password: 'MyBindPassword'         
-#     user_base_dn: 'o=users,o=example,o=com'    
+#     authenticator_downcase: false
+#     url: 'ldap://your_ldap_url'
+#     bind_dn: 'cn=sonaruser,o=example,o=com'
+#     bind_password: 'MyBindPassword'
+#     user_base_dn: 'o=users,o=example,o=com'
 #     authentication: simple
 #     realm: 'example.org'
 #     context_factory_class: com.sun.jndi.ldap.LdapCtxFactory
@@ -265,7 +265,7 @@ sonar_web_access_logs_pattern: "%i{X-Forwarded-For} %l %u [%t] \"%r\" %s %b \"%i
 #     user_email_attribute: 'mail'
 #     group_base_dn: 'o=groups,o=example,o=com'
 #     group_request: '(&(objectClass=groupOfNames)(member={dn}))'
-#     group_id_attribute: 'sAMAccountName'  
+#     group_id_attribute: 'sAMAccountName'
 #
 # default: undefined
 # sonar_ldap:

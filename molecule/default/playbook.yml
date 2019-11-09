@@ -1,0 +1,30 @@
+---
+- name: Converge
+  hosts: all
+  vars:
+    sonar_plugins:
+      - name: "sonar-l10n-pt"
+        version: "6.4"
+        commercial: false
+        url: "https://github.com/felipebz/sonar-l10n-pt/releases/download/v6.4/sonar-l10n-pt-plugin-6.4.jar"
+
+      - name: "sonar-l10n-es"
+        version: "1.14"
+        commercial: false
+        url: "https://github.com/acalero/sonar-l10n-es/releases/download/sonar-l10n-es-plugin-1.14/sonar-l10n-es-plugin-1.14.jar"
+
+  pre_tasks:
+    - name: "Ensure apt cache is up to date"
+      apt:
+        update_cache: yes
+      when: ansible_distribution == 'Ubuntu'
+    - name: "Install package dependencies"
+      package:
+        name: "{{ item }}"
+        state: "present"
+      with_items:
+        - unzip
+
+  roles:
+    - role: geerlingguy.java
+    - role: ansible-role-sonarqube

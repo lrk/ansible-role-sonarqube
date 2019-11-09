@@ -6,9 +6,17 @@ galaxy_info:
   min_ansible_version: 2.4
 
   platforms:
-  - name: EL
-    versions:
-    - 7
+    - name: EL
+      versions:
+        - 7
+    - name: Ubuntu
+      versions:
+        - Bionic
+        - Xenial
+    - name: Debian
+      versions:
+        - Stretch
+        - Jessie
 
   galaxy_tags:
     - 'centos'
