@@ -85,7 +85,7 @@ sonar.ce.workerCount={{ sonar_ce_worker_count | default('1') }}
 #--------------------------------------------------------------------------------------------------
 # ELASTICSEARCH
 
-sonar.search.javaOpts={{ sonar_search_java_opts | default('-Xmx1G -Xms1G -Xss256k -Djava.net.preferIPv4Stack=true -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=75 -XX:+UseCMSInitiatingOccupancyOnly -XX:+HeapDumpOnOutOfMemoryError') }}
+sonar.search.javaOpts={{ sonar_search_java_opts | default('-Xmx1G -Xms1G -Xss256k -Djava.net.preferIPv4Stack=true -XX:CMSInitiatingOccupancyFraction=75 -XX:+UseCMSInitiatingOccupancyOnly -XX:+HeapDumpOnOutOfMemoryError') }}
 sonar.search.javaAdditionalOpts={{ sonar_search_java_additional_opts | default('') }}
 sonar.search.port={{ sonar_search_port | default('9001') }}
 sonar.search.host={{ sonar_search_host | default('127.0.0.1') }}
