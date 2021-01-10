@@ -64,11 +64,11 @@
   check_mode: no # because this module does not support check mode
   ignore_errors: "{{ ansible_check_mode }}"
 
-  # task always run in check mode and have a status 'changed' when row missed
-  # more details in https://stackoverflow.com/a/46454251
 - name: "Verify the Sonar version"
-  lineinfile:
-    dest: "{{ sonar_logs_dir }}/web.log"
-    line: "SonarQube Server / {{ sonar_version }}"
-  check_mode: yes
-  notify: fail if expected sonar version not found in log
+  command: "grep 'SonarQube Server / {{ sonar_version }}' {{ sonar_logs_dir }}/web.log"
+  register: grep_version
+  check_mode: no
+  failed_when: grep_version.rc >= 2 # for example, if log not found
+  changed_when: grep_version.rc == 1 # if log found, but string not exist
+  notify: fail if expected sonar version not found in log # triggered on change
+  ignore_errors: "{{ ansible_check_mode }}"
