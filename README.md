@@ -227,7 +227,7 @@ Available variables along with default values are listed below (see `defaults/ma
   #    is not enabled by default on your environment:
   #    http://docs.oracle.com/javase/8/docs/technotes/guides/vm/server-class.html
   #
-  sonar_search_java_opts: "-Xmx1G -Xms256m -Xss256k -Djava.net.preferIPv4Stack=true -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=75 -XX:+UseCMSInitiatingOccupancyOnly -XX:+HeapDumpOnOutOfMemoryError"
+  sonar_search_java_opts: "-Xmx1G -Xms256m -Xss1m -Djava.net.preferIPv4Stack=true -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=75 -XX:+UseCMSInitiatingOccupancyOnly -XX:+HeapDumpOnOutOfMemoryError"
 
   # Same as previous property, but allows to not repeat all other settings like -Xmx
   sonar_search_java_additional_opts: ""
