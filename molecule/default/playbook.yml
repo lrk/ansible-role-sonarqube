@@ -19,12 +19,60 @@
       apt:
         update_cache: yes
       when: ansible_distribution == 'Ubuntu'
+
     - name: "Install package dependencies"
       package:
         name: "{{ item }}"
         state: "present"
       with_items:
         - unzip
+
+    # Block below added because the geerlingguy.java role in Debian 8
+    # install by default the OpenJDK 7 as described in
+    # https://github.com/geerlingguy/ansible-role-java/blob/master/vars/Debian-8.yml
+
+    # The Java 7 is not supported by SonarQube 7.3 as shown in
+    # https://docs.sonarqube.org/7.3/Requirements.html
+
+    # With Java 7 Sonar service attempt to start,
+    # but later fail with error "Unsupported major.minor version 52.0"
+
+    # These steps added only for Molecule and role may have described problem.
+    # Here it needed as workaround to have tests passed for
+    # https://github.com/lrk/ansible-role-sonarqube/issues/30 and do not change role logic.
+
+    # Maybe it's time discontinue support of Debian 8 (EOL was June 30, 2020)
+
+    - name: "Install Java 8 in Debian 8 as it doesn't supported by Geerlingguy role"
+      when: ansible_distribution_release == "jessie"
+      block:
+        - name: "Debian 8 - disable repository valid-until check"
+          lineinfile:
+            path: /etc/apt/apt.conf
+            line: Acquire::Check-Valid-Until "false";
+            create: yes
+            owner: root
+            group: root
+            mode: 0644
+
+        - name: "Debian 8 - add jessie-backports repo"
+          apt_repository:
+            repo: deb http://archive.debian.org/debian jessie-backports main
+            state: present
+
+        - name: "Debian 8 - ensure apt cache is up to date"
+          apt:
+            update_cache: yes
+          changed_when: no
+
+        - name: "Debian 8 - install openjdk-8-jdk"
+          command: apt install -t jessie-backports openjdk-8-jdk -y
+          changed_when: no
+
+        - name: "Debian 8 - set java_packages value to supported by Sonar"
+          set_fact:
+            java_packages:
+              - openjdk-8-jdk
 
   roles:
     - role: geerlingguy.java
