@@ -50,3 +50,25 @@
   with_items: "{{ sonar_plugins }}"
   loop_control:
     loop_var: "sonar_cplugin"
+
+- meta: flush_handlers
+
+- name: "Ensure web-interface is started"
+  uri:
+    url: "http://{{ sonar_web_host }}:{{ sonar_web_port }}/{{ sonar_web_context }}/"
+    method: GET
+  register: _sonar_page
+  until: _sonar_page.status == 200
+  retries: 60
+  delay: 5
+  check_mode: no # because this module does not support check mode
+  ignore_errors: "{{ ansible_check_mode }}"
+
+  # task always run in check mode and have a status 'changed' when row missed
+  # more details in https://stackoverflow.com/a/46454251
+- name: "Verify the Sonar version"
+  lineinfile:
+    dest: "{{ sonar_logs_dir }}/web.log"
+    line: "SonarQube Server / {{ sonar_version }}"
+  check_mode: yes
+  notify: fail if expected sonar version not found in log

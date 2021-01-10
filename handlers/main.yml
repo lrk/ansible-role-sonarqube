@@ -4,3 +4,10 @@
   service:
     name: sonar
     state: restarted
+
+- name: "fail if expected sonar version not found in log"
+  ansible.builtin.fail:
+    msg:
+      Not found log record about start of web UI for version {{ sonar_version }}.
+      Please verify the 'Version' field of http://{{ inventory_hostname }}{{ sonar_web_context }}.
+      Logs could be found in {{ sonar_logs_dir }} and {{ sonar_base_dir }}/logs
