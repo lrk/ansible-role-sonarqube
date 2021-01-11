@@ -20,6 +20,9 @@ env:
 install:
   - pip install --quiet molecule
   - pip install --quiet 'molecule[docker]'
+  - pip install --quiet ansible-lint
+  - pip install --quiet flake8
+  - pip install --quiet pytest-testinfra
 
 before_script:
   - molecule --version
