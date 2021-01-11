@@ -8,6 +8,14 @@
     sonar_version: 7.4
     sonar_plugins: []
   tasks:
+
+    # First task is a part of Debian 8 workaround from molecule/default/playbook.yml
+    - name: "Debian 8 - set java_packages value to supported by Sonar"
+      set_fact:
+        java_packages:
+          - openjdk-8-jdk
+      when: ansible_distribution_release == "jessie"
+
     - name: "Start role again and apply upgrade to {{ sonar_version }}"
       include_role:
         name: ansible-role-sonarqube
