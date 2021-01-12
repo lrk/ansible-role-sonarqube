@@ -1,0 +1,15 @@
+---
+- name: Prepare
+  hosts: all
+  tasks:
+    - name: "Ensure apt cache is up to date"
+      apt:
+        update_cache: yes
+      when: ansible_distribution == 'Ubuntu'
+
+    - name: "Install package dependencies"
+      package:
+        name: "{{ item }}"
+        state: "present"
+      with_items:
+        - unzip
