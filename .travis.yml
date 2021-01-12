@@ -13,7 +13,6 @@ env:
   - MOLECULE_DISTRO=centos7
   # - MOLECULE_DISTRO=ubuntu1804
   # - MOLECULE_DISTRO=ubuntu1604
-  - MOLECULE_DISTRO=debian8
   - MOLECULE_DISTRO=debian9
   # - MOLECULE_DISTRO=debian10
 
@@ -22,7 +21,6 @@ install:
   - pip install --quiet 'molecule[docker]'
   - pip install --quiet ansible-lint
   - pip install --quiet flake8
-  - pip install --quiet pytest-testinfra
 
 before_script:
   - molecule --version

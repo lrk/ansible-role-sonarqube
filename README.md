@@ -13,7 +13,7 @@ Supported OSes
 This role as been tested on the following OSes:
 
 - EL - 7
-- Debian -  Stretch / Jessie
+- Debian -  Stretch
 
 Requirements
 ------------
