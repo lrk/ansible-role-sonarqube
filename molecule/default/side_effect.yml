@@ -1,0 +1,11 @@
+---
+# starts after idempotence stage
+- name: Side Effect
+  hosts: all
+  vars:
+    sonar_version: 7.4
+    sonar_plugins: []
+  tasks:
+    - name: "Start role again and apply upgrade to {{ sonar_version }}"
+      include_role:
+        name: ansible-role-sonarqube
