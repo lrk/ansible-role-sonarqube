@@ -4,3 +4,7 @@
   service:
     name: sonar
     state: restarted
+
+- name: "fail if expected sonar version not confirmed"
+  fail:
+    msg: Please check if 'Version' field of http://{{ inventory_hostname }}{{ sonar_web_context }} match to {{ sonar_version }}
