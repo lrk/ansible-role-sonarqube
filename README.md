@@ -392,6 +392,29 @@ Example Playbook
       - lrk.sonarqube
 ```
 
+Upgrade
+------------
+Please test upgrade in staging environment first
+
+Process consist of the next steps:
+
+1. Change the var `sonar_version`
+2. Review the var `sonar_plugins` in accordance with https://docs.sonarqube.org/latest/instance-administration/plugin-version-matrix/
+3. Run the role over existing installation. Ansible will:
+- create the installation folder
+- place here the binaries of new SonarQube with plugins
+- stop the currently running service
+- update configs
+- start service again
+- ensure web-service started and SonarQube version number appear in web.log
+- ensure that running Sonar version correspond to expected
+4. Then you need open http://yourSonarQubeServerURL/setup and follow the setup instructions as described in https://docs.sonarqube.org/latest/setup/upgrading/ (role output leave a reminder for this)
+
+Please pay your attention:
+- role doesn't backup the database
+- role doesn't compare the versions. Please avoid of making downgrade by mistake
+- role doesn't remove the folder with previous installation, so after upgrade the path specified in variable `sonar_install_directory` will contain more than one `sonar_base_dir`
+
 License
 -------
 
