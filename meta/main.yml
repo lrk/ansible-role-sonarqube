@@ -16,7 +16,6 @@ galaxy_info:
     - name: Debian
       versions:
         - Stretch
-        - Jessie
 
   galaxy_tags:
     - 'centos'

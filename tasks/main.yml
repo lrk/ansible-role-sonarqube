@@ -50,3 +50,19 @@
   with_items: "{{ sonar_plugins }}"
   loop_control:
     loop_var: "sonar_cplugin"
+
+- meta: flush_handlers
+
+- name: "Ensure target version matches"
+  uri:
+    url: "http://{{ sonar_web_host }}:{{ sonar_web_port }}{{ sonar_web_context }}/api/server/version"
+    method: GET
+    return_content: yes
+  register: api_check_version
+  until: api_check_version.status == 200
+  retries: 60
+  delay: 5
+  check_mode: no # uri module not support check mode (at least in Ansible 2.10)
+  changed_when: sonar_version | string not in api_check_version.content
+  notify: fail if expected sonar version not confirmed
+  ignore_errors: "{{ ansible_check_mode }}"

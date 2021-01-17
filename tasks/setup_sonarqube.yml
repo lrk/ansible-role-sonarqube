@@ -1,6 +1,6 @@
 ---
 
-- name: "Ensure SonarQube binary exists"
+- name: "Check if SonarQube binary exists"
   stat:
     path: "{{ sonar_daemon_dir }}/sonar.sh"
   register: sonar_binary_stat
@@ -26,6 +26,16 @@
       path: "/tmp/{{ __sonar_archive }}"
       state: absent
 
+  - name: "Collect the list of services to check if sonar.service exists"
+    service_facts:
+
+  - name: "Stop service before upgrade"
+    service:
+      name: sonar
+      state: stopped
+    when: '"sonar.service" in ansible_facts.services'
+    notify: warn about post-upgrade steps
+
   when: not sonar_binary_stat.stat.exists
 
 - name: "Ensure SonarQube as init script for service management"
@@ -42,7 +52,14 @@
     owner: root
     group: root
     mode: 0755
+  register: systemd_service
   when: "ansible_service_mgr == 'systemd'"
+
+- name: Force systemd to reread configs
+  systemd:
+    daemon_reload: yes
+  tags: skip_ansible_lint
+  when: systemd_service is defined and systemd_service.changed
 
 - name: "Ensure SonarQube is running and set to start on boot."
   service:
