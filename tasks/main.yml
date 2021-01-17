@@ -53,7 +53,7 @@
 
 - meta: flush_handlers
 
-- name: "Ensure application started"
+- name: "Ensure target version matches"
   uri:
     url: "http://{{ sonar_web_host }}:{{ sonar_web_port }}{{ sonar_web_context }}/api/server/version"
     method: GET
