@@ -85,6 +85,21 @@ Available variables along with default values are listed below (see `defaults/ma
   # SonarQube system user
   sonar_user: sonar
 
+  # Ability to change admin password
+  # Specify the old and new admin password
+  # to change it when playing the role
+  # SonarQube web admin user
+  sonar_admin_user: admin
+
+  # SonarQube web admin password
+  sonar_admin_password: admin
+
+  # SonarQube change admin password
+  sonar_admin_password_change: false
+
+  # SonarQube old admin password
+  sonar_admin_old_password: admin
+
   # SonarQube service LimitNOFILE parameter
   sonar_limitnofile: 65536
 
