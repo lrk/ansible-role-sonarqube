@@ -72,7 +72,7 @@
     method: POST
     url: "http://{{ sonar_web_host }}:{{ sonar_web_port }}{{ sonar_web_context }}/api/authentication/login"
     force_basic_auth: true
-    url_user: "{{ sonar_admin_user }}"
+    url_username: "{{ sonar_admin_user }}"
     url_password: "{{ sonar_admin_old_password }}"
     body: "login={{ sonar_admin_user }}&password={{ sonar_admin_old_password }}"
     body_format: form-urlencoded
@@ -89,7 +89,7 @@
     method: POST
     url: "http://{{ sonar_web_host }}:{{ sonar_web_port }}{{ sonar_web_context }}/api/users/change_password"
     force_basic_auth: true
-    url_user: "{{ sonar_admin_user }}"
+    url_username: "{{ sonar_admin_user }}"
     url_password: "{{ sonar_admin_old_password }}"
     body: "login={{ sonar_admin_user }}&password={{ sonar_admin_password }}&previousPassword={{ sonar_admin_old_password }}"
     body_format: form-urlencoded
