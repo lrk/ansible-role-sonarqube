@@ -5,7 +5,7 @@
 #--------------------------------------------------------------------------------------------------
 # DATABASE
 
-{% if sonar_db_embedded %}
+{% if sonar_db_embedded|bool %}
 sonar.embeddedDatabase.port={{ sonar_db_embedded_port | default('9092') }}
 {% else %}
 sonar.jdbc.username={{ sonar_db_user }}
