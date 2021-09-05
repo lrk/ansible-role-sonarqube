@@ -1,9 +1,12 @@
 galaxy_info:
-  author: lrk
-  description: "An Ansible Role that install SonarQube."
-  license: "Apache License Version 2.0"
-
-  min_ansible_version: 2.4
+  author: jetune
+    role_name: sonarqube
+    description: Ansible Role for Sonarqube Installation [Fork From IRK]
+    company: "Kube Cloud"
+    issue_tracker_url: https://github.com/kube-cloud/ansible-role-sonarqube.git
+    license: "license (Apache 2.0)"
+    min_ansible_version: 2.9
+    github_branch: master
 
   platforms:
     - name: EL
@@ -24,4 +27,4 @@ galaxy_info:
     - 'sonarqube'
 
 dependencies:
-  - geerlingguy.java
+  - jetune.java
