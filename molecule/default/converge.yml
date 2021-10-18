@@ -8,11 +8,26 @@
         version: "6.4"
         commercial: false
         url: "https://github.com/felipebz/sonar-l10n-pt/releases/download/v6.4/sonar-l10n-pt-plugin-6.4.jar"
-
       - name: "sonar-l10n-es"
         version: "1.14"
         commercial: false
         url: "https://github.com/acalero/sonar-l10n-es/releases/download/sonar-l10n-es-plugin-1.14/sonar-l10n-es-plugin-1.14.jar"
+  pre_tasks:
+    - name: install openjdk (redhat)
+      package:
+        name: java-11-openjdk
+        state: present
+      when: ansible_facts['os_family'] == "RedHat"
+    - name: add backports repository
+      apt_repository:
+        repo: deb http://ftp.debian.org/debian stretch-backports main
+        state: present
+        update_cache: yes
+      when: ansible_facts['os_family'] == "Debian"
+    - name: install openjdk (debian)
+      apt:
+        name: openjdk-11-jdk
+        state: present
+      when: ansible_facts['os_family'] == "Debian"
   roles:
-    - role: geerlingguy.java
     - role: ansible-role-sonarqube
