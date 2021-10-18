@@ -51,7 +51,8 @@
   loop_control:
     loop_var: "sonar_cplugin"
 
-- meta: flush_handlers
+- name: flush handlers
+  meta: flush_handlers
 
 - name: "Ensure target version matches"
   uri:

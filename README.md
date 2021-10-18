@@ -288,7 +288,7 @@ Available variables along with default values are listed below (see `defaults/ma
   # Access log is the list of all the HTTP requests received by server. If enabled, it is stored
   # in the file {sonar.path.logs}/access.log. This file follows the same rolling policy as for
   # sonar.log (see sonar.log.rollingPolicy and sonar.log.maxFiles).
-  sonar_web_accessLogs_enable: true
+  sonar_web_access_logs_enable: true
 
   # Format of access log. It is ignored if sonar.web.accessLogs.enable=false. Possible values are:
   #    - "common" is the Common Log Format, shortcut to: %h %l %u %user %date "%r" %s %b
