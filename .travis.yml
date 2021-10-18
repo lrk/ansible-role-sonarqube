@@ -17,6 +17,8 @@ env:
   # - MOLECULE_DISTRO=debian10
 
 install:
+  - pip install --quiet yamllint
+  - pip install --quiet ansible
   - pip install --quiet molecule
   - pip install --quiet 'molecule[docker]'
   - pip install --quiet ansible-lint
