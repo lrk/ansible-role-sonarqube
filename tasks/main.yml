@@ -28,6 +28,12 @@
     - "{{ sonar_data_dir }}"
     - "{{ sonar_temp_dir }}"
 
+- name: "set max_map_count value (required by elasticsearch)"
+  sysctl:
+    name: vm.max_map_count
+    value: 262144
+    state: present
+
 - name: "Ensure JAVA is installed"
   command: "java -version"
   register: prereq_java
@@ -51,7 +57,8 @@
   loop_control:
     loop_var: "sonar_cplugin"
 
-- meta: flush_handlers
+- name: "flush handlers"
+  meta: flush_handlers
 
 - name: "Ensure target version matches"
   uri:

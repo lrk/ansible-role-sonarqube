@@ -1,5 +1,6 @@
 galaxy_info:
   author: lrk
+  role_name: sonarqube
   description: "An Ansible Role that install SonarQube."
   license: "Apache License Version 2.0"
 
@@ -22,6 +23,3 @@ galaxy_info:
     - 'development'
     - 'monitoring'
     - 'sonarqube'
-
-dependencies:
-  - geerlingguy.java
