@@ -1,6 +1,7 @@
 ---
 # vars file for ansible-role-sonarqube/
 __sonarsource_url: "https://binaries.sonarsource.com"
+__sonar_marketplace_url: "https://update.sonarsource.org"
 __sonar_distribution_url: "{{ __sonarsource_url }}/Distribution"
 __sonar_archive: "sonarqube-{{ sonar_version }}.zip"
 __sonar_download_url: "{{ __sonar_distribution_url }}/sonarqube/{{ __sonar_archive }}"

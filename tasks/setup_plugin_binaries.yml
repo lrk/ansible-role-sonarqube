@@ -1,0 +1,14 @@
+---
+- name: "{{ sonar_cplugin.name }} | Set current plugin's jar filename"
+  set_fact:
+    cplugin_fname: "{{ sonar_cplugin.name }}-{{ sonar_cplugin.version }}.jar"
+
+- name: "{{ sonar_cplugin.name }} | Set current plugins's custom download URL if available"
+  set_fact:
+    cplugin_url: "{{ sonar_cplugin.url }}"
+  when: sonar_cplugin.url is defined and sonar_cplugin.url | length > 0
+
+- name: "{{ sonar_cplugin.name }} | Set current plugins's default download URL no custom one"
+  set_fact:
+    cplugin_url: "{{ sonar_cplugin.commercial | ternary(sonar_commercial_plugin_baseurl,sonar_plugin_baseurl) }}/{{ sonar_cplugin.name }}/{{ cplugin_fname }}"
+  when: cplugin_url is not defined or cplugin_url | length <= 0
