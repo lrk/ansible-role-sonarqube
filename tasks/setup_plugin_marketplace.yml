@@ -22,11 +22,6 @@
       - "'versions' in plugin_info"
     msg: "there is no versions information for {{ sonar_cplugin.name }} please check {{ plugin_url }}"
 
-- name: debug
-  debug:
-    var: item.version
-  loop: "{{ plugin_info['versions'] }}"
-
 - name: check given version is supported
   assert:
     that:
