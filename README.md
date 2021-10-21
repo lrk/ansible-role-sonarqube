@@ -331,6 +331,9 @@ Available variables along with default values are listed below (see `defaults/ma
   # Delay in seconds between processing of notification queue. Default is 60 seconds.
   sonar_notifications_delay: 60
 
+  # Pass any custom Java properties to sonar.properties
+  sonar_additional_properties: {}
+
   #--------------------------------------------------------------------------------------------------
   # OVERRIDE DEFAULT INTERNAL VALUES
 
