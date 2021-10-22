@@ -13,6 +13,7 @@
     dest: "{{ __sonar_plugin_home }}"
     owner: "{{ sonar_user }}"
     group: "{{ sonar_group }}"
+    mode: "0644"
   retries: 5
   delay: 10
   notify:

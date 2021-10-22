@@ -74,7 +74,7 @@
     recurse: yes
     owner: "{{ sonar_user }}"
     group: "{{ sonar_group }}"
-    mode: "go-w"
+    mode: "o-w"
 
 - name: "Ensure SonarQube configuration"
   template:
