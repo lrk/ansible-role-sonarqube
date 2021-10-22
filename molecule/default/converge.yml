@@ -2,16 +2,18 @@
 - name: Converge
   hosts: all
   vars:
-    sonar_version: 7.3
+    sonar_version: 7.9
     sonar_plugins:
       - name: "sonar-l10n-pt"
         version: "6.4"
         commercial: false
         url: "https://github.com/felipebz/sonar-l10n-pt/releases/download/v6.4/sonar-l10n-pt-plugin-6.4.jar"
-      - name: "sonar-l10n-es"
-        version: "1.14"
+      - name: "sonar-html-plugin"
+        version: "3.2.0.2082"
         commercial: false
-        url: "https://github.com/acalero/sonar-l10n-es/releases/download/sonar-l10n-es-plugin-1.14/sonar-l10n-es-plugin-1.14.jar"
+      - name: "ansible"
+        version: "2.4.0"
+        marketplace: true
   pre_tasks:
     - name: install openjdk (redhat)
       package:
