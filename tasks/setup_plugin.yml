@@ -1,9 +1,9 @@
 ---
-- name: install plugin from binaries.sonarsource.com
+- name: "install plugin from binaries.sonarsource.com"
   include: setup_plugin_binaries.yml
   when: not sonar_cplugin.get('marketplace', false)|bool
 
-- name: install plugin from updates.sonarsource.com
+- name: "install plugin from updates.sonarsource.com"
   include: setup_plugin_marketplace.yml
   when: sonar_cplugin.get('marketplace', false)|bool
 
