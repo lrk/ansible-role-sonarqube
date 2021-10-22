@@ -277,6 +277,8 @@ sonar_web_access_logs_pattern: "%i{X-Forwarded-For} %l %u [%t] \"%r\" %s %b \"%i
 # Delay in seconds between processing of notification queue. Default is 60 seconds.
 sonar_notifications_delay: 60
 
+# Pass any custom Java properties to sonar.properties
+sonar_additional_properties: {}
 
 #--------------------------------------------------------------------------------------------------
 # DEVELOPMENT - only for developers
