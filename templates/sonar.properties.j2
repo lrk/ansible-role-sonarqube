@@ -148,6 +148,13 @@ sonar.notifications.delay={{ sonar_notifications_delay | default('60') }}
 sonar.path.data={{ sonar_data_dir | default('data') }}
 sonar.path.temp={{ sonar_temp_dir | default('temp') }}
 
+{% if sonar_additional_properties is defined %}
+#--------------------------------------------------------------------------------------------------
+# ADDITIONAL PROPERIES
+{%   for p in sonar_additional_properties | dict2items %}
+{{ p.key }} = {{ p.value }}
+{%   endfor %}
+{% endif %}
 
 #--------------------------------------------------------------------------------------------------
 # DEVELOPMENT - only for developers
