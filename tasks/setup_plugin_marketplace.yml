@@ -1,0 +1,28 @@
+---
+- name: "set plugin json url"
+  set_fact:
+    plugin_url: "{{ __sonar_marketplace_url }}/{{ sonar_cplugin.name }}.json"
+
+- name: "get plugin json for {{ sonar_cplugin.name }}"
+  uri:
+    url: "{{ plugin_url }}"
+    method: GET
+    return_content: yes
+    status_code: 200
+    body_format: json
+  register: result
+
+- name: "extract plugin info"
+  set_fact:
+    plugin_info: "{{ result['content'] | from_json }}"
+
+- name: "check version"
+  assert:
+    that:
+      - "'versions' in plugin_info"
+      - "sonar_cplugin.version in plugin_info['versions']|map(attribute='version')|list"
+    msg: "{{ sonar_cplugin.name }} plugin version '{{ sonar_cplugin.version }}' doesn't exist in {{ plugin_url }}"
+
+- name: "set download url"
+  set_fact:
+    cplugin_url: "{{ (plugin_info['versions']|selectattr('version','equalto',sonar_cplugin.version))[0]['downloadURL'] }}"

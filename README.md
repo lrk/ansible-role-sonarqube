@@ -31,18 +31,28 @@ For further informations, please dive into [SonarQube requirements](https://docs
 SonarQube plugin installation
 -----------------------------
 
-This role support plugin installation based on "[SonarQube manual plugin installation](https://docs.sonarqube.org/display/SONAR/Installing+a+Plugin)" procedure.
+This role supports plugin installation based on "[SonarQube Install a Plugin](https://docs.sonarqube.org/latest/setup/install-plugin/)" procedure. Both marketplace and manual methods are supported.
 
 Please note that this role does not handle previously installed plugins.
-You *HAVE TO* remove previous versions yourself as stated in SonarQube documentation:
-`If another version of the same plugin is already there, you need to remove it, since only one version of a given plugin may be available in the extensions/plugins directory.`
+You **have to** remove previous versions yourself.
 
-You can list all plugin you need in the `sonar_plugins` variables, with the following syntax:
-```
-# sonar_plugins variable example:
+To install plugins list them in `sonar_plugins` dictionary, the following options are available:
+- `name`: plugin name, for marketplace plugin it should be the name of plugin's manifest (json) from [here](https://update.sonarsource.org), for manual plugins it can be name of the plugin folder from [here](https://binaries.sonarsource.com/Distribution) or provide `url` option (see below);
+- `version`: plugin version;
+- `commercial`: is this commercial plugin (an another download location actually), make sense only for manual plugins;
+- `url`: link to plugin's jar, if provided, role doesn't try to find plugin and use this link, doesn't make sense for marketplace plugins because download url should be provided in manifest;
+- `marketplace`: is this manual or marketplace plugin, default is false.
+
+Example:
+```yml
 sonar_plugins:
-- { name: "sonar-city-model-plugin", version: "3.3", commercial: true, url: "http://www.qalitax.com/descargas/product/sonar-city-model-plugin-3.3.jar?customerSurnames=update-center&customerCompany=sonar-update-center&customerName=sonarqube&customerEmail=downloads@excentia.es"}
-
+  - name: "sonar-city-model-plugin"
+    version: "3.3"
+    commercial: true
+    url: "http://www.qalitax.com/descargas/product/sonar-city-model-plugin-3.3.jar?customerSurnames=update-center&customerCompany=sonar-update-center&customerName=sonarqube&customerEmail=downloads@excentia.es"}
+  - name: "ansible"
+    version: "2.4.0"
+    marketplace: true
 ```
 
 
@@ -88,9 +98,8 @@ Available variables along with default values are listed below (see `defaults/ma
   # SonarQube service LimitNOFILE parameter
   sonar_limitnofile: 65536
 
-  # SonarQube plugins to install
+  # SonarQube plugins to install (see detailed description above)
   sonar_plugins: []
-  # - { name: "plugin name", version: "1.0", commercial: false, url: 'optional'}
 
   # Use the embedded H2 database, not for production environmnet
   sonar_db_embedded: true
@@ -304,11 +313,11 @@ Available variables along with default values are listed below (see `defaults/ma
   #
   # Example:
   # sonar_ldap:
-  #     authenticator_downcase: false           
-  #     url: 'ldap://your_ldap_url'             
+  #     authenticator_downcase: false
+  #     url: 'ldap://your_ldap_url'
   #     bind_dn: 'cn=sonaruser,o=example,o=com'
-  #     bind_password: 'MyBindPassword'         
-  #     user_base_dn: 'o=users,o=example,o=com'    
+  #     bind_password: 'MyBindPassword'
+  #     user_base_dn: 'o=users,o=example,o=com'
   #     authentication: simple
   #     realm: 'example.org'
   #     context_factory_class: com.sun.jndi.ldap.LdapCtxFactory
@@ -320,7 +329,7 @@ Available variables along with default values are listed below (see `defaults/ma
   #     user_email_attribute: 'mail'
   #     group_base_dn: 'o=groups,o=example,o=com'
   #     group_request: '(&(objectClass=groupOfNames)(member={dn}))'
-  #     group_id_attribute: 'sAMAccountName'  
+  #     group_id_attribute: 'sAMAccountName'
   #
   # default: undefined
   # sonar_ldap:

@@ -52,7 +52,8 @@
 
 - include_tasks: setup_sonarqube.yml
 
-- include_tasks: setup_plugin.yml
+- name: "install plugins"
+  include_tasks: setup_plugin.yml
   with_items: "{{ sonar_plugins }}"
   loop_control:
     loop_var: "sonar_cplugin"
