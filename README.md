@@ -1,6 +1,6 @@
 Ansible Role: SonarQube ([lrk.sonarqube](https://galaxy.ansible.com/lrk/sonarqube/))
 =========
-[![Build Status](https://travis-ci.org/lrk/ansible-role-sonarqube.svg?branch=master)](https://travis-ci.org/lrk/ansible-role-sonarqube)
+[![Molecule](https://github.com/lrk/ansible-role-sonarqube/actions/workflows/molecule.yml/badge.svg)](https://github.com/lrk/ansible-role-sonarqube/actions/workflows/molecule.yml)
 [![Galaxy](https://img.shields.io/badge/galaxy-lrk.sonarqube-blue.svg)](https://galaxy.ansible.com/lrk/sonarqube)
 ![Ansible](https://img.shields.io/ansible/role/d/20831.svg)
 ![Ansible](https://img.shields.io/badge/dynamic/json.svg?label=min_ansible_version&url=https%3A%2F%2Fgalaxy.ansible.com%2Fapi%2Fv1%2Froles%2F20831%2F&query=$.min_ansible_version)
