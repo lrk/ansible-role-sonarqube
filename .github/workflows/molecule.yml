@@ -1,0 +1,31 @@
+---
+name: Molecule
+on:  
+  push:
+  pull_request:
+    branches:
+      - master
+jobs:
+  molecule:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        distro:
+          - centos7
+          - debian9
+    steps:
+      - uses: actions/checkout@v2
+      - name: python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - name: dependencies
+        run: pip3 install yamllint ansible ansible-lint flake8 molecule[docker] docker
+      - name: molecule
+        run: molecule test
+        env:
+          PY_COLORS: '1'
+          ANSIBLE_FORCE_COLOR: '1'
+          MOLECULE_DISTRO: ${{ matrix.distro }}
