@@ -86,6 +86,11 @@ Available variables along with default values are listed below (see `defaults/ma
   # Paths to temporary files
   sonar_temp_dir: "{{ sonar_base_dir }}/temp"
 
+  # SonarQube edition to install
+  sonar_edition: community
+  # sonar_edition: developer
+  # sonar_edition: enterprise
+
   # SonarQube version to install
   sonar_version: 5.6.7
 

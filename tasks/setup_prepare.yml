@@ -1,9 +1,25 @@
 ---
 
-- name: "Overwrite SonarQube download url"
+- name: "Overwrite SonarQube download url for community edition"
   set_fact:
-    sonar_download_url: "{{ __sonar_download_url }}"
-  when: sonar_download_url is not defined
+    sonar_download_url: "{{ __sonar_ce_download_url }}"
+  when:
+  - sonar_download_url is not defined
+  - sonar_edition == "community"
+
+- name: "Overwrite SonarQube download url for developer edition"
+  set_fact:
+    sonar_download_url: "{{ __sonar_de_download_url }}"
+  when:
+  - sonar_download_url is not defined
+  - sonar_edition == "developer"
+
+- name: "Overwrite SonarQube download url for enterprise edition"
+  set_fact:
+    sonar_download_url: "{{ __sonar_ee_download_url }}"
+  when:
+  - sonar_download_url is not defined
+  - sonar_edition == "enterprise"
 
 - name: "Overwrite SonarQube plugin base url"
   set_fact:
