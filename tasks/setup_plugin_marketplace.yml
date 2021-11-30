@@ -25,4 +25,4 @@
 
 - name: "set download url"
   set_fact:
-    cplugin_url: "{{ (plugin_info['versions']|selectattr('version','equalto',sonar_cplugin.version))[0]['downloadURL'] }}"
+    cplugin_url: "{{ ((plugin_info['versions']|selectattr('version','equalto',sonar_cplugin.version))|list)[0]['downloadURL'] }}"
