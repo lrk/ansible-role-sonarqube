@@ -1,0 +1,30 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: vagrant
+  provider:
+    name: virtualbox
+lint: |
+  set -e
+  yamllint .
+  ansible-lint .
+  flake8
+platforms:
+  - name: molecule-sonarqube
+    box: ${MOLECULE_DISTRO:-centos/7}
+    memory: 2048
+    cpus: 2
+provisioner:
+  name: ansible
+  ansible_args:
+    - --become
+  lint:
+    name: ansible-lint
+  playbooks:
+    converge: ../default/converge.yml
+    prepare: ../default/prepare.yml
+    side_effect: ../default/side_effect.yml
+verifier:
+  lint:
+    name: flake8
