@@ -3,7 +3,7 @@
 - name: Side Effect
   hosts: all
   vars:
-    sonar_version: 7.4
+    sonar_version: 8.9.3.48735
     sonar_plugins: []
   tasks:
     - name: "Start role again and apply upgrade to {{ sonar_version }}"
