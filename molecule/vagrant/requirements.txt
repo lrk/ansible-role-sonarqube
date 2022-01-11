@@ -1,0 +1,6 @@
+yamllint
+ansible
+ansible-lint
+flake8
+molecule
+molecule-vagrant

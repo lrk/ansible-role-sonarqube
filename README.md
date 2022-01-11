@@ -55,6 +55,24 @@ sonar_plugins:
     marketplace: true
 ```
 
+How to test locally with vagrant
+--------------------------------
+
+1. Install [Vagrant](https://www.vagrantup.com) and [VirtualBox](https://www.virtualbox.org/wiki/Downloads).
+2. Initialize virtualenv and setup requirements, for example:
+```
+python -m venv ~/.virtualenvs/molecule
+. ~/.virtualenvs/molecule/bin/activate
+pip install -r molecule/vagrant/requirements.txt
+```
+3. Run tests (CentOS box is used by default):
+```
+molecule test -s vagrant
+```
+4. (optional) Run tests for an another OS (ubuntu in this case):
+```
+MOLECULE_DISTRO=ubuntu/trusty64 molecule test -s vagrant
+```
 
 Role Variables
 --------------
