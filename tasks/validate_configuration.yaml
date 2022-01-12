@@ -1,0 +1,7 @@
+---
+
+- name: Validate sonar_edition
+  assert:
+    that:
+    - sonar_edition in __sonar_download_url
+    fail_msg: "'sonar_edition' must be one of 'community', 'developer', 'enterprise'"

@@ -1,6 +1,8 @@
 ---
 # tasks file for ansible-role-sonarqube/
 
+- include_tasks: validate_configuration.yaml
+
 - name: "Create SonarQube system group"
   group:
     name: "{{ sonar_group }}"
